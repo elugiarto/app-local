@@ -3,6 +3,8 @@
 
 App Local provide a repeatable local development environment that matches the App Server infrastructure and associated databases and services.
 
+![Travis CI Test Status](https://travis-ci.org/dbtedman/app-local.svg)
+
 ## Contributors
 
 * [Daniel Tedman](http://danieltedman.com)
@@ -57,7 +59,7 @@ vagrant up --provision
 
 ## Testing
 
-This repositories tests are run per commit using [https://travis-ci.org](https://travis-ci.org).
+See [https://travis-ci.org/dbtedman/app-local](https://travis-ci.org/dbtedman/app-local) for CI results.
 
 ### Static Analysis
 
