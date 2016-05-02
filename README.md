@@ -16,15 +16,18 @@ See [GitHub Issues](https://github.com/dbtedman/app-local/issues) for the projec
 * [Vagrant (v1.8.1)](https://www.vagrantup.com)
 * [Vagrant Librarian Puppet (v0.9.2)](https://github.com/mhahn/vagrant-librarian-puppet)
 * [Vagrant Puppet Install (v4.1.0)](https://github.com/petems/vagrant-puppet-install)
+* Internet Access
+
+*The following are required when modifying this repository.*
+
 * [Puppet Lint (v1.1.0)](http://puppet-lint.com/)
 * [EditorConfig](http://editorconfig.org/)
-* Internet Access
 
 ## Getting Started
 
 1\. Ensure all **Dependencies** have been met.
 
-2\. Define a `developer.yaml` configuration file:
+2\. Define a `developer.yaml` configuration file to customise how Vagrant operates:
 
 ```yaml
 # Defines which directories will be mapped into apache root `/app` directory.
@@ -33,7 +36,7 @@ projects:
   example: '../example-files'
 ```
 
-3\. Define a `yaml/developer.yaml` configuration file:
+3\. Define a `yaml/developer.yaml` configuration file to customise Puppet configuration:
 
 ```yaml
 mysql:
