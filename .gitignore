@@ -1,0 +1,15 @@
+#
+# Git Ignore Config, https://git-scm.com/docs/gitignore.
+#
+
+# Developer Config
+/hiera/developer.yaml
+/developer.yaml
+
+# Vagrant
+/.vagrant
+
+# Puppet Librarian
+/.librarian
+/.tmp
+/modules
