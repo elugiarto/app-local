@@ -7,6 +7,8 @@ App Local provide a repeatable local development environment that matches the Ap
 
 * [Daniel Tedman](http://danieltedman.com)
 
+See [GitHub Issues](https://github.com/dbtedman/app-local/issues) for the project's backlog.
+
 ## Dependencies
 
 * [Vagrant (v1.8.1)](https://www.vagrantup.com)
@@ -60,15 +62,3 @@ vagrant up --provision
 ```bash
 puppet-lint --fix app_modules/
 ```
-
-## TODO
-
-* Configure OracleDB
-* Configure MySQL
-* Update PHP version to latest. (Will depend on current app infrastructure available version)
-* Create a dummy SSO system.
-* Enable Hiera config to provide out of repository passwords.
-* Logging for all services with debug status enabled.
-* PHP debugging.
-* Manage `/etc/php.ini` config, http://php.net/manual/en/configuration.file.php.
-* Add https://xdebug.org support.
