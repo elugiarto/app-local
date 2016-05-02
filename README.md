@@ -57,6 +57,8 @@ vagrant up --provision
 
 ## Testing
 
+This repositories tests are run per commit using [https://travis-ci.org](https://travis-ci.org).
+
 ### Static Analysis
 
 ```bash
