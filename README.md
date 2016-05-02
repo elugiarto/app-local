@@ -9,7 +9,7 @@ App Local provide a repeatable local development environment that matches the Ap
 
 * [Daniel Tedman](http://danieltedman.com)
 
-See [GitHub Issues](https://github.com/dbtedman/app-local/issues) for the project's backlog.
+See `CONTRIBUTING.md` guide to learn how to contribute.
 
 ## Dependencies
 
