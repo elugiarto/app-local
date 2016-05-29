@@ -53,6 +53,12 @@ vagrant up --provision
 
 [https://localhost:8443](https://localhost:8443)
 
+6\. To start/stop/restart services, use the following commands:
+
+| Service | Command |
+|:---|:---|
+| Apache | `sudo apachectl $ACTION` |
+
 ## Mapped Ports
 
 | Port | VM Service |
