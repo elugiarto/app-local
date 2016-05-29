@@ -4,16 +4,13 @@
 # Required Modules:
 #   https://forge.puppet.com/puppetlabs/apache
 #
-# TODO: Manage php version, see http://php.net/manual/en/install.unix.apache2.php.
-# TODO: Revisit use of vagrant:vagrant for apache.
-#
 class app::components::apache {
 
   $doc_root = '/app'
 
   class { 'apache':
     default_vhost => false,
-    user          => 'vagrant', # For simplicity, run with vagrant here.
+    user          => 'vagrant',
     group         => 'vagrant'
   }
 
@@ -21,8 +18,9 @@ class app::components::apache {
     ensure  => 'directory',
   }
 
-  file { '/etc/php.ini':
-    source => "puppet:///modules/${module_name}/php.ini"
+  php::ini { '/etc/php.ini':
+    date_timezone => 'Australia/Brisbane',
+    memory_limit  => '-1', # Set no memory limit.
   }
 
   apache::vhost { 'app.local':
@@ -40,7 +38,6 @@ class app::components::apache {
       {
         path           => $doc_root,
         require        => 'all granted',
-        options        => [],
         allow_override => [
           'All'
         ],
@@ -48,19 +45,61 @@ class app::components::apache {
     ]
   }
 
-  class { 'apache::mod::php':
+  # PHP version management based on http://stackoverflow.com/questions/21502656/upgrading-php-on-centos-6-5-final
+
+  exec { 'Webtatic Repository':
+    command     => '/usr/bin/rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm',
+    refreshonly => true,
+  }
+
+  exec { 'Remove PHP Common':
+    command     => '/usr/bin/yum remove php-common',
+    refreshonly => true,
+    require     => Exec['Webtatic Repository'],
+  }
+
+  package { 'php56w':
+    ensure  => 'installed',
     require => [
-      Package['php-xml'],
-      Package['php-pdo'],
+      Class['epel'],
+      Exec['Remove PHP Common']
     ],
   }
 
-  package { 'php-xml':
-    ensure => 'installed',
+  package { 'php56w-mysql':
+    ensure  => 'installed',
+    require => Package['php56w'],
   }
 
-  package { 'php-pdo':
-    ensure => 'installed',
+  package { 'php56w-common':
+    ensure  => 'installed',
+    require => Package['php56w'],
+  }
+
+  package { 'php56w-pdo':
+    ensure  => 'installed',
+    require => Package['php56w'],
+  }
+
+  package { 'php56w-opcache':
+    ensure  => 'installed',
+    require => Package['php56w'],
+  }
+
+  package { 'php56w-odbc':
+    ensure  => 'installed',
+    require => Package['php56w'],
+  }
+
+  package { 'php56w-pgsql':
+    ensure  => 'installed',
+    require => Package['php56w'],
+  }
+
+  class { 'apache::mod::php':
+    require => [
+      Package['php56w']
+    ],
   }
 
   file { "${doc_root}/about.php":
