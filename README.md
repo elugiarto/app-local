@@ -1,7 +1,7 @@
 
 # App Local
 
-App Local provide a repeatable local development environment that matches the App Server infrastructure and associated databases and services.
+This repository provide a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
 ![Travis CI Test Status](https://travis-ci.org/dbtedman/app-local.svg)
 
