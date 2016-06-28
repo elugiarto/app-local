@@ -1,7 +1,7 @@
 
 # App Local
 
-App Local provide a repeatable local development environment that matches the App Server infrastructure and associated databases and services.
+This repository provide a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
 ![Travis CI Test Status](https://travis-ci.org/dbtedman/app-local.svg)
 
@@ -27,38 +27,45 @@ See `CONTRIBUTING.md` guide to learn how to contribute.
 
 1\. Ensure all **Dependencies** have been met.
 
-2\. Define a `developer.yaml` configuration file to customise how Vagrant operates:
+2\. Define a `yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration:
 
 ```yaml
-# Defines which directories will be mapped into apache root `/app` directory.
-projects:
-  # This would exist as /app/example in the VM.
-  example: '../example-files'
-```
+#
+# Puppet and Vagrant customisations.
+#
 
-3\. Define a `yaml/developer.yaml` configuration file to customise Puppet configuration:
-
-```yaml
 mysql:
-    root_password: 'password'
+  root_password: 'password'
+
+# Defines which repositories will be mapped into the VM and how.
+projects:
+  example:
+    source: '/Users/jane/Workspace/example'
+    public: '/public' # Relative to example source.
 ```
 
-4\. Start and provision VM:
+3\. Start and provision VM:
 
 ```bash
 vagrant up --provision
 ```
 
-5\. View an index of deployed applications:
+4\. View an index of deployed applications:
 
 [https://localhost:8443](https://localhost:8443)
 
+5\. To `start`/`stop`/`restart` services, use the following commands:
+
+| Service | Command |
+|:---|:---|
+| Apache | `sudo apachectl $ACTION` |
+
 ## Mapped Ports
 
-| Port | VM Service |
+| Port | Purpose |
 |:---|:---|
-| `8443` | HTTPS website. |
-| `3306` | MySQL database. |
+| `8443` | HTTPS website, [https://localhost:8443](https://localhost:8443). |
+| `3306` | Workstation access to MySQL database. |
 
 ## Testing
 

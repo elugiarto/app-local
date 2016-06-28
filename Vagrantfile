@@ -11,8 +11,8 @@ Vagrant.configure(2) do |config|
   #
   # Load developer config to customise vm and define mapped folders.
   #
-  if File.exist? 'developer.yaml'
-    developer = YAML.load(File.open('developer.yaml'))
+  if File.exist? 'hiera/developer.yaml'
+    developer = YAML.load(File.open('hiera/developer.yaml'))
   end
 
   #
@@ -31,15 +31,13 @@ Vagrant.configure(2) do |config|
   #
   config.vm.define 'localhost' do |app|
     app.vm.hostname = 'localhost'
-    developer_machine_port = 8443
-    vm_port = 443
-    mysql_port = 3306
-    app.vm.network 'forwarded_port', guest: vm_port, host: developer_machine_port, host_ip: '127.0.0.1', auto_correct: true
-    app.vm.network 'forwarded_port', guest: mysql_port, host: mysql_port, host_ip: '127.0.0.1', auto_correct: true
+
+    app.vm.network 'forwarded_port', guest: 443, host: 8443, host_ip: '127.0.0.1', auto_correct: true
+    app.vm.network 'forwarded_port', guest: 3306, host: 3306, host_ip: '127.0.0.1', auto_correct: true
 
     if developer.has_key? 'projects'
       developer['projects'].each_pair do |to, from|
-        app.vm.synced_folder File.expand_path(from, File.dirname(__FILE__)), "/app/#{to}"
+        app.vm.synced_folder File.expand_path(from['source'], File.dirname(__FILE__)), "/app/source/#{to}"
       end
     end
   end
