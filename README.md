@@ -37,6 +37,14 @@ See `CONTRIBUTING.md` guide to learn how to contribute.
 mysql:
   root_password: 'password'
 
+  databases:
+    testdb:
+      users:
+        testuser:
+          password: 'password'
+          grants:
+            - 'ALL'
+
 # Defines which repositories will be mapped into the VM and how.
 projects:
   example:

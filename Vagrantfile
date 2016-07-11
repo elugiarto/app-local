@@ -32,8 +32,8 @@ Vagrant.configure(2) do |config|
   config.vm.define 'localhost' do |app|
     app.vm.hostname = 'localhost'
 
-    app.vm.network 'forwarded_port', guest: 443, host: 8443, host_ip: '127.0.0.1', auto_correct: true
-    app.vm.network 'forwarded_port', guest: 3306, host: 3306, host_ip: '127.0.0.1', auto_correct: true
+    app.vm.network 'forwarded_port', guest: 443, host: 8443, host_ip: '127.0.0.1'
+    app.vm.network 'forwarded_port', guest: 3306, host: 3306, host_ip: '127.0.0.1'
 
     if developer.has_key? 'projects'
       developer['projects'].each_pair do |to, from|

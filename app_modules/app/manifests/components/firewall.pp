@@ -16,11 +16,9 @@ class app::components::firewall {
   }
 
   # MySQL database access.
-  firewall { '400 Accept incoming port MYSQL':
-    chain  => 'INPUT',
-    action => 'accept',
-    state  => 'NEW',
-    proto  => 'tcp',
-    dport  => ['3306'],
+  firewall { '100 allow mysql access':
+    dport  => [3306],
+    proto  => tcp,
+    action => accept,
   }
 }
