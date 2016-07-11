@@ -13,13 +13,9 @@ class app::components::apache {
 
   # Create links to the public directories of each repository.
   $projects.each |$name, $mappings| {
-
-      $from_dir = "${doc_source}/${name}"
-      $to_dir = "${doc_root}/${mappings['public']}"
-
-      file { $to_dir:
+      file { "${doc_root}/${name}":
         ensure => 'link',
-        target => $from_dir,
+        target => "${doc_source}/${name}${mappings['public']}",
       }
     }
 
@@ -77,25 +73,5 @@ class app::components::apache {
     group   => 'vagrant',
     content => '<?php phpinfo();',
     require => Class['apache::mod::php']
-  }
-
-  package { 'php-mysql':
-    ensure  => 'installed',
-    require => Class['apache::mod::php'],
-  }
-
-  package { 'php-pdo':
-    ensure  => 'installed',
-    require => Class['apache::mod::php'],
-  }
-
-  package { 'php-odbc':
-    ensure  => 'installed',
-    require => Class['apache::mod::php'],
-  }
-
-  package { 'php-pgsql':
-    ensure  => 'installed',
-    require => Class['apache::mod::php'],
   }
 }
