@@ -14,7 +14,7 @@ See `CONTRIBUTING.md` guide to learn how to contribute.
 ## Dependencies
 
 * [Vagrant (v1.8.1)](https://www.vagrantup.com)
-* [Vagrant Librarian Puppet (v0.9.2)](https://github.com/mhahn/vagrant-librarian-puppet)
+* [Vagrant Librarian Puppet (v0.9.2)](https://github.com/mhahn/vagrant-librarian-puppet) - *Has issues on Windows 7, install librarian-puppet ruby library instead.*
 * [Vagrant Puppet Install (v4.1.0)](https://github.com/petems/vagrant-puppet-install)
 * Internet Access
 
