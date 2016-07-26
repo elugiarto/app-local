@@ -66,21 +66,8 @@ vagrant up --provision
 
 | Service | Command |
 |:---|:---|
-| Apache | `sudo apachectl $ACTION` |
+| Apache | `sudo service httpd restart` |
 
-6\. Manually upgrade php version. (Soon to be replaced with automated)
-
-Based on [https://webtatic.com/packages/php55/](https://webtatic.com/packages/php55/).
-
-```bash
-sudo rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;
-sudo rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
-
-sudo yum remove php-common;
-sudo yum install php55w php55w-opcache php55w-mysql php55w-pdo php55w-odbc php55w-pgsql;
-
-sudo service httpd restart;
-```
 
 ## Mapped Ports
 

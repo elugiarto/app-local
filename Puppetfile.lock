@@ -14,12 +14,10 @@ FORGE
     puppetlabs-stdlib (4.12.0)
     stahnma-epel (1.2.2)
       puppetlabs-stdlib (>= 3.0.0)
-    thias-php (1.2.0)
 
 DEPENDENCIES
   puppetlabs-apache (= 1.10.0)
   puppetlabs-firewall (= 1.8.0)
   puppetlabs-mysql (= 3.7.0)
   stahnma-epel (= 1.2.2)
-  thias-php (= 1.2.0)
 

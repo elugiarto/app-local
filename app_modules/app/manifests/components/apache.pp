@@ -1,5 +1,6 @@
 #
 # Apache and PHP Configuration.
+# PHP configuration is based on https://webtatic.com/packages/php55/, to enable version 5.5 support.
 #
 # Required Modules:
 #   https://forge.puppet.com/puppetlabs/apache
@@ -37,9 +38,12 @@ class app::components::apache {
     group  => 'vagrant',
   }
 
-  php::ini { '/etc/php.ini':
-    date_timezone => 'Australia/Brisbane',
-    memory_limit  => '-1', # Set no memory limit.
+  file { '/etc/php.ini':
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("${module_name}/php.ini.erb"),
   }
 
   apache::vhost { 'localhost':
@@ -65,7 +69,33 @@ class app::components::apache {
     ]
   }
 
-  class { 'apache::mod::php': }
+  $install_options = [
+    '-Uvh',
+    '--nosignature'
+  ]
+
+  package { 'epel-release-7-7.noarch':
+    ensure          => 'installed',
+    provider        => 'rpm',
+    source          => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm',
+    install_options => $install_options,
+  }
+
+  package { 'webtatic-release-7-3.noarch':
+    ensure          => 'installed',
+    provider        => 'rpm',
+    source          => 'https://mirror.webtatic.com/yum/el7/webtatic-release.rpm',
+    install_options => $install_options,
+  }
+
+  class { 'apache::mod::php':
+    package_name   => 'php55w', # Ensure we install php 5.5 package.
+    package_ensure => 'installed',
+    require        => [
+      Package['epel-release-7-7.noarch'],
+      Package['webtatic-release-7-3.noarch']
+    ],
+  }
 
   file { "${doc_root}/about.php":
     ensure  => 'file',
@@ -73,5 +103,40 @@ class app::components::apache {
     group   => 'vagrant',
     content => '<?php phpinfo();',
     require => Class['apache::mod::php']
+  }
+
+  package { 'php55w-opcache':
+    ensure  => 'installed',
+    require => [
+      Package['php55w'],
+    ],
+  }
+
+  package { 'php55w-mysql':
+    ensure  => 'installed',
+    require => [
+      Package['php55w'],
+    ],
+  }
+
+  package { 'php55w-pdo':
+    ensure  => 'installed',
+    require => [
+      Package['php55w'],
+    ],
+  }
+
+  package { 'php55w-odbc':
+    ensure  => 'installed',
+    require => [
+      Package['php55w'],
+    ],
+  }
+
+  package { 'php55w-pgsql':
+    ensure  => 'installed',
+    require => [
+      Package['php55w'],
+    ],
   }
 }
