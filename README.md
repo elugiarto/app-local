@@ -1,15 +1,13 @@
 
 # App Local
 
-This repository provide a repeatable local development environment that matches an app server infrastructure, associated databases and services.
+Provides a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
-![Travis CI Test Status](https://travis-ci.org/dbtedman/app-local.svg)
+[![Travis CI Test Status](https://travis-ci.org/dbtedman/app-local.svg)](https://travis-ci.org/dbtedman/app-local)
 
 ## Contributors
 
 * [Daniel Tedman](http://danieltedman.com)
-
-See `CONTRIBUTING.md` guide to learn how to contribute.
 
 ## Dependencies
 
