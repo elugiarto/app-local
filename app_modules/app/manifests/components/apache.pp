@@ -12,6 +12,20 @@ class app::components::apache {
   $doc_source = '/app/source'
   $security_key = '/app/security key'
 
+  # TODO: Provide defaults and allow override in hiera.
+  $sso_dummy_staff_number = 's123456'
+  $sso_dummy_given_name = 'Jane'
+  $sso_dummy_family_name = 'Doe'
+  $sso_dummy_email = 'jane.doe@notgriffith.edu.au'
+  $sso_dummy_group_memberships = [
+    'cn=General Staff (All),ou=Groups,o=Griffith University',
+    'cn=Staff (NA),ou=Groups,o=Griffith University'
+  ]
+  $sso_dummy_affiliations = [
+    'EMPLOYEE',
+    'GENERAL'
+  ]
+
   $projects = hiera('projects', [])
 
   # Create links to the public directories of each repository.

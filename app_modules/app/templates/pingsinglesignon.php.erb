@@ -1,11 +1,42 @@
 <?php
 /**
- * Functions which will emulate the behaviour of SSO functions on server, without actually performing the loging.
+ * Functions which will emulate the behaviour of SSO functions on server, without actually performing the logging.
  */
 
 function singleSignOn()
 {
-  return (true, array()); // Return dummy data.
+  $groupMemberships = array();
+  $affiliations = array();
+
+  <% @sso_dummy_group_memberships.each do |group_membership| %>
+    $groupMemberships[] = "<%= group_membership %>";
+  <% end %>
+
+  <% @sso_dummy_affiliations.each do |affiliation| %>
+    $affiliations[] = "<%= affiliation %>";
+  <% end %>
+
+  return array(true, array(
+    "userid" => "<%= @sso_dummy_staff_number %>",
+    "name" => "<%= @sso_dummy_given_name %> <%= @sso_dummy_family_name %>",
+    "emplid" => "<%= @sso_dummy_staff_number %>",
+    "email" => "", // TODO: Currently returned as empty.
+    "roles" => array(), // TODO: Verify this is actually defined in this method.
+    "raw" => array(
+      "mail" => "<%= @sso_dummy_email %>",
+      "partnerEntityID" => "priLoginForm",
+      "sn" => "<%= @sso_dummy_family_name %>",
+      "com.pingidentity.plugin.instanceid" => "agentlessRID",
+      "cn" => "<%= @sso_dummy_staff_number %>",
+      "subject" => "<%= @sso_dummy_staff_number %>",
+      "instanceId" => "agentlessRID",
+      "guAffiliation" => $affiliations,
+      "groupMembership" => $groupMemberships,
+      "givenName" => "<%= @sso_dummy_given_name %>",
+      "sessionid" => "hkMSPDoV2udyupULWBolNfYtl6Y", // TODO: Does this need to be fixed or random for dev purposes?
+      "authnInst" => (new DateTime())->format("o-m-d h:i:sO") // e.g. 2016-07-25 12:31:42+1000
+    )
+  ));
 }
 
 function singleSignonRedirect()
