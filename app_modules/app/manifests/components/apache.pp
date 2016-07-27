@@ -7,8 +7,10 @@
 #
 class app::components::apache {
 
+  $app_root = '/app'
   $doc_root = '/app/web'
   $doc_source = '/app/source'
+  $security_key = '/app/security key'
 
   $projects = hiera('projects', [])
 
@@ -26,16 +28,58 @@ class app::components::apache {
     group         => 'vagrant'
   }
 
+  file { $app_root:
+    ensure => 'directory',
+    owner  => 'vagrant',
+    group  => 'vagrant',
+  }
+
   file { $doc_root:
     ensure => 'directory',
     owner  => 'vagrant',
     group  => 'vagrant',
+    require => File[$app_root],
   }
 
   file { $doc_source:
     ensure => 'directory',
     owner  => 'vagrant',
     group  => 'vagrant',
+    require => File[$app_root],
+  }
+
+  file { $security_key:
+    ensure => 'directory',
+    owner  => 'vagrant',
+    group  => 'vagrant',
+    require => File[$app_root],
+  }
+
+  file { "${security_key}/.pingsinglesignon.php":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("${module_name}/pingsinglesignon.php.erb"),
+    require => File[$security_key],
+  }
+
+  file { "${doc_root}/logout.php":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("${module_name}/logout.php.erb"),
+    require => File[$doc_root],
+  }
+
+  file { "${doc_root}/login.php":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("${module_name}/login.php.erb"),
+    require => File[$doc_root],
   }
 
   file { '/etc/php.ini':

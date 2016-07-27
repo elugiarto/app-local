@@ -1,0 +1,19 @@
+<?php
+/**
+ * Functions which will emulate the behaviour of SSO functions on server, without actually performing the loging.
+ */
+
+function singleSignOn()
+{
+  return (true, array()); // Return dummy data.
+}
+
+function singleSignonRedirect()
+{
+  return "/login.php";
+}
+
+function getPSLogoutByEnv()
+{
+  return "/logout.php";
+}
