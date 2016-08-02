@@ -11,15 +11,17 @@ Provides a repeatable local development environment that matches an app server i
 
 ## Dependencies
 
-* [Vagrant (v1.8.1)](https://www.vagrantup.com)
-* [Vagrant Librarian Puppet (v0.9.2)](https://github.com/mhahn/vagrant-librarian-puppet) - *Has issues on Windows 7, install librarian-puppet ruby library instead.*
-* [Vagrant Puppet Install (v4.1.0)](https://github.com/petems/vagrant-puppet-install)
+* [Virtual Box (v5.1)](https://www.virtualbox.org/)
+* [Vagrant (v1.8)](https://www.vagrantup.com)
+* [Vagrant Librarian Puppet (v0.9)](https://github.com/mhahn/vagrant-librarian-puppet)
+    * *Has issues on Windows 7, install [librarian-puppet](https://github.com/rodjek/librarian-puppet) ruby library instead. Then run `librarian-puppet install` from the `app-local` root directory to install puppet dependencies.*
+* [Vagrant Puppet Install (v4.1)](https://github.com/petems/vagrant-puppet-install)
 * Internet Access
 
 *The following are required when modifying this repository.*
 
-* [Puppet Lint (v1.1.0)](http://puppet-lint.com/)
-* [EditorConfig](http://editorconfig.org/)
+* [Puppet Lint (v1.1)](http://puppet-lint.com/)
+* [EditorConfig](http://editorconfig.org/#download)
 
 ## Getting Started
 
@@ -31,6 +33,9 @@ Provides a repeatable local development environment that matches an app server i
 #
 # Puppet and Vagrant customisations.
 #
+
+# Set to true if you get ssh auth errors when provisioning vm.
+disable_ssh_key_insert: false
 
 mysql:
   root_password: 'password'
@@ -45,9 +50,9 @@ mysql:
 
 # Defines which repositories will be mapped into the VM and how.
 projects:
-  example:
-    source: '/Users/jane/Workspace/example'
-    public: '/public' # Relative to example source.
+  example: # This key will be used in the url of the website, e.g. https://localhost:8443/example
+    source: '/Users/jane/Workspace/example' # The location of the code on the development machine. Use '/' or '\' based on OS.
+    public: '/public' # Path relative to the root of code as it will appear in the vm. (Uses '/' here even if source is on Windows)
 ```
 
 3\. Start and provision VM:

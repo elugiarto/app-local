@@ -16,6 +16,13 @@ Vagrant.configure(2) do |config|
   end
 
   #
+  # If you have issues with failed authentication messages duing vm setup, uncomment this line.
+  #
+  if developer.has_key? 'disable_ssh_key_insert' and developer['disable_ssh_key_insert'] == true
+    config.ssh.insert_key=false
+  end
+
+  #
   # Get CentOS Box, https://atlas.hashicorp.com/puppetlabs/boxes/centos-7.2-64-puppet/versions/1.0.1.
   #
   config.vm.box = 'puppetlabs/centos-7.2-64-puppet'
