@@ -16,7 +16,7 @@ Vagrant.configure(2) do |config|
   end
 
   #
-  # If you have issues with failed authentication messages duing vm setup, uncomment this line.
+  # Handle errors with ssh key insertion.
   #
   if developer.has_key? 'disable_ssh_key_insert' and developer['disable_ssh_key_insert'] == true
     config.ssh.insert_key=false
