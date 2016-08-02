@@ -25,7 +25,7 @@ Provides a repeatable local development environment that matches an app server i
 
 ## Getting Started
 
-1\. Ensure all **Dependencies** have been met.
+1\. Ensure all [Dependencies](#dependencies) have been satisfied.
 
 2\. Define a `yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration:
 
@@ -65,23 +65,11 @@ vagrant up --provision
 
 [https://localhost:8443](https://localhost:8443)
 
-5\. To `start`/`stop`/`restart` services, use the following commands:
-
-| Service | Command |
-|:---|:---|
-| Apache | `sudo service httpd restart` |
-
-
-## Mapped Ports
-
-| Port | Purpose |
-|:---|:---|
-| `8443` | HTTPS website, [https://localhost:8443](https://localhost:8443). |
-| `3306` | Workstation access to MySQL database. |
+To check php config, visit [https://localhost:8443/about.php](https://localhost:8443/about.php).
 
 ## Testing
 
-See [https://travis-ci.org/dbtedman/app-local](https://travis-ci.org/dbtedman/app-local) for CI results.
+See [https://travis-ci.org/dbtedman/app-local](https://travis-ci.org/dbtedman/app-local) for CI results, run on each commit.
 
 ### Static Analysis
 
@@ -90,3 +78,20 @@ Check for formatting issues and automatically resolve them where possible.
 ```bash
 puppet-lint app_modules/ --fix
 ```
+
+## Services
+
+To `start`/`stop`/`restart`/`status` services, use the following commands:
+
+| Service | Command |
+|:---|:---|
+| Apache | `sudo service httpd status` |
+| MySQL | `sudo service mysql status` |
+
+
+## Mapped Ports
+
+| Port | Purpose |
+|:---|:---|
+| `8443` | HTTPS website, [https://localhost:8443](https://localhost:8443). |
+| `3306` | Workstation access to MySQL database. |
