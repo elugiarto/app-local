@@ -31,16 +31,16 @@ class app::components::mysql {
 
         if $db_config.has_key('users') {
           $db_config['users'].each |$username, $user_config| {
-              mysql_user { "$username@%":
+              mysql_user { "${username}@%":
                 ensure        => 'present',
                 password_hash => mysql_password($user_config['password']),
               }
 
-              mysql_grant { "$username@%/$name.*":
+              mysql_grant { "${username}@%/${name}.*":
                 ensure     => 'present',
                 privileges => $user_config['grants'],
-                user       => "$username@%",
-                table      => "$name.*",
+                user       => "${username}@%",
+                table      => "${name}.*",
               }
             }
         }

@@ -21,7 +21,7 @@ Provides a repeatable local development environment that matches an app server i
 *The following are required when modifying this repository.*
 
 * [Puppet Lint (v1.1)](http://puppet-lint.com/)
-* [EditorConfig](http://editorconfig.org/#download)
+* [EditorConfig](http://editorconfig.org/#download) (optional)
 
 ## Getting Started
 
@@ -85,6 +85,8 @@ See [https://travis-ci.org/dbtedman/app-local](https://travis-ci.org/dbtedman/ap
 
 ### Static Analysis
 
+Check for formatting issues and automatically resolve them where possible.
+
 ```bash
-puppet-lint --fix app_modules/
+puppet-lint app_modules/ --fix
 ```

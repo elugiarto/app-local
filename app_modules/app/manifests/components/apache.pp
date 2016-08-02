@@ -49,23 +49,23 @@ class app::components::apache {
   }
 
   file { $doc_root:
-    ensure => 'directory',
-    owner  => 'vagrant',
-    group  => 'vagrant',
+    ensure  => 'directory',
+    owner   => 'vagrant',
+    group   => 'vagrant',
     require => File[$app_root],
   }
 
   file { $doc_source:
-    ensure => 'directory',
-    owner  => 'vagrant',
-    group  => 'vagrant',
+    ensure  => 'directory',
+    owner   => 'vagrant',
+    group   => 'vagrant',
     require => File[$app_root],
   }
 
   file { $security_key:
-    ensure => 'directory',
-    owner  => 'vagrant',
-    group  => 'vagrant',
+    ensure  => 'directory',
+    owner   => 'vagrant',
+    group   => 'vagrant',
     require => File[$app_root],
   }
 
