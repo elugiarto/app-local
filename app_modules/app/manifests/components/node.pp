@@ -18,55 +18,22 @@ class app::components::node {
     require => Package['nodejs'],
   }
 
-  #
-  # Install a range of Node CLI tools.
-  #
+  $packages = [
+    'grunt-cli', # http://gruntjs.com
+    'gulp-cli', # http://gulpjs.com
+    'webpack', # http://webpack.github.io
+    'bower', # https://bower.io
+    'eslint', # http://eslint.org
+    'jspm', # http://jspm.io
+    'typescript', # https://www.typescriptlang.org
+    'babel-cli', # https://babeljs.io
+  ]
 
-  # http://gruntjs.com
-  exec { 'grunt-cli':
-    command => 'npm install -g grunt-cli',
-    require => Package['npm'],
-  }
-
-  # http://gulpjs.com
-  exec { 'gulp-cli':
-    command => 'npm install -g gulp-cli',
-    require => Package['npm'],
-  }
-
-  # http://webpack.github.io
-  exec { 'webpack':
-    command => 'npm install -g webpack',
-    require => Package['npm'],
-  }
-
-  # https://bower.io
-  exec { 'bower':
-    command => 'npm install -g bower',
-    require => Package['npm'],
-  }
-
-  # http://eslint.org
-  exec { 'eslint':
-    command => 'npm install -g eslint',
-    require => Package['npm'],
-  }
-
-  # http://jspm.io
-  exec { 'jspm':
-    command => 'npm install -g jspm',
-    require => Package['npm'],
-  }
-
-  # https://www.typescriptlang.org
-  exec { 'typescript':
-    command => 'npm install -g typescript',
-    require => Package['npm'],
-  }
-
-  # https://babeljs.io
-  exec { 'babel-cli':
-    command => 'npm install -g babel-cli',
-    require => Package['npm'],
-  }
+  $packages.each |$package| {
+      exec { $package:
+        command => "npm install -g ${package}",
+        require => Package['npm'],
+        unless  => "npm -g list --depth=0 | grep -q ${package}",
+      }
+    }
 }
