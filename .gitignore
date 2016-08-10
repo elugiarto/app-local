@@ -4,7 +4,6 @@
 
 # Developer Config
 /hiera/developer.yaml
-/developer.yaml
 
 # Vagrant
 /.vagrant
