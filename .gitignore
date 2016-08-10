@@ -13,3 +13,6 @@
 /.librarian
 /.tmp
 /modules
+
+# Files downloaded from vendor.
+/app_modules/app/files/oracle-*

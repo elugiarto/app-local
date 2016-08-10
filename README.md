@@ -17,6 +17,9 @@ Provides a repeatable local development environment that matches an app server i
     * *Has issues on Windows 7, install [librarian-puppet](https://github.com/rodjek/librarian-puppet) ruby library instead. Then run `librarian-puppet install` from the `app-local` root directory to install puppet dependencies.*
 * [Vagrant Puppet Install (v4.1)](https://github.com/petems/vagrant-puppet-install)
 * Internet Access
+* [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxsoft-082809.html) - *Download the following RPMs into `/app_modules/app/files`. The names of these files will need to be added to the `heria/developer.yaml` config file.*
+    * `oracle-instantclient12.1-basic-$CURRENT_VERSION.i386.rpm`
+    * `oracle-instantclient12.1-devel-$CURRENT_VERSION.i386.rpm`
 
 *The following are required when modifying this repository.*
 
@@ -36,6 +39,10 @@ Provides a repeatable local development environment that matches an app server i
 
 # Set to true if you get ssh auth errors when provisioning vm.
 disable_ssh_key_insert: false
+
+# RPM files downloaded in dependencies instructions.
+oracle_instantclient_basic: 'oracle-instantclient12.1-basic-12.1.0.2.0-1.i386.rpm'
+oracle_instantclient_development: 'oracle-instantclient12.1-devel-12.1.0.2.0-1.i386.rpm'
 
 mysql:
   root_password: 'password'
