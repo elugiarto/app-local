@@ -11,6 +11,7 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 * MySQL with configurable databases with user accounts.
 * Configurable project sync from developer workstation into vm.
 * Oci8 module support for php to connect to Oracle Databases.
+* Add Node and NPM support, along with some commonly used CLI tools.
 
 ### Bug Fixes
 
