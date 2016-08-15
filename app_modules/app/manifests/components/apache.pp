@@ -103,7 +103,6 @@ class app::components::apache {
     group   => 'root',
     mode    => '0644',
     content => template("${module_name}/php.ini.erb"),
-    require => Exec['pecl-install-oci8'],
   }
 
   apache::vhost { 'localhost':
@@ -223,69 +222,12 @@ class app::components::apache {
     ],
   }
 
-
-  #
-  # Install oci8 extension for php.
-  #
-  # Based on https://github.com/franek/puppet-php-oci8.
-  #
-
-  $instant_client_basic = hiera('oracle_instantclient_basic', '')
-  $instant_client_development = hiera('oracle_instantclient_development', '')
-  $answer_pecl_oci8 = 'answer-pecl-oci8.txt'
-
-  file { "/tmp/${instant_client_basic}":
-    source => "puppet:///modules/${module_name}/${instant_client_basic}",
-  }
-
-  file { "/tmp/${instant_client_development}":
-    source => "puppet:///modules/${module_name}/${instant_client_development}",
-  }
-
-  file { '/tmp/answer-pecl-oci8.txt':
-    source => "puppet:///modules/${module_name}/${answer_pecl_oci8}",
-  }
-
-  package { 'oracle-instantclient-basic':
-    provider        => 'rpm',
-    name            => $instant_client_basic,
-    source          => "/tmp/${instant_client_basic}",
-    ensure          => 'installed',
-    install_options => '--force',
-    require         => File["/tmp/${instant_client_basic}"]
-  }
-
-  package { 'oracle-instantclient-devel':
-    provider        => 'rpm',
-    name            => $instant_client_development,
-    source          => "/tmp/${instant_client_development}",
-    ensure          => 'installed',
-    install_options => '--force',
-    require         => [
-      File["/tmp/${instant_client_development}"],
-      Package['oracle-instantclient-basic'],
-    ]
-  }
-
-  # TODO: This may be conflicting with php55w, based on the php-common, lets see if we can avoid that by changing the dependency tree.
-  package { 'php-pear':
-    ensure => 'installed',
+  package { 'php55w-pear':
+    ensure  => 'installed',
     require => [
       Package['php55w'],
-      Package['php55w-common'],
-      Package['php55w-devel'],
     ],
   }
 
-  # Version specified here for oci8 as later versions require php7.
-  exec { 'pecl-install-oci8':
-    command => "pecl install oci8-2.0.11 < /tmp/${answer_pecl_oci8}",
-    user    => 'root',
-    unless  => 'php -m | grep -c oci8',
-    path    => $path,
-    require => [
-      Package['oracle-instantclient-devel'],
-      Package['php-pear'],
-    ],
-  }
+  class { 'app::components::oracle::instant_client': }
 }
