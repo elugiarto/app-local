@@ -33,8 +33,11 @@ Provides a repeatable local development environment that matches an app server i
 4\. Start and provision VM:
 
 ```bash
+# This command starts up the vm and runs the provisioner.
 vagrant up --provision
 ```
+
+See [Vagrant CLI](https://www.vagrantup.com/docs/cli) for documentation on to interact with the vm.
 
 5\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
 
