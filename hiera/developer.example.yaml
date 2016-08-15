@@ -1,0 +1,28 @@
+#
+# Puppet and Vagrant customisations. (Example configuration)
+#
+
+# Set to true if you get ssh auth errors when provisioning vm.
+disable_ssh_key_insert: false
+
+# RPM files downloaded in dependencies instructions.
+oracle_instantclient_basic: 'oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm'
+oracle_instantclient_development: 'oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm'
+oracle_instantclient_sqlplus: 'oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm'
+
+mysql:
+  root_password: 'password'
+
+  databases:
+    testdb:
+      users:
+        testuser:
+          password: 'password'
+          grants:
+            - 'ALL'
+
+# Defines which repositories will be mapped into the VM and how.
+projects:
+  example: # This key will be used in the url of the website, e.g. https://localhost:8443/example
+    source: '/Users/jane/Workspace/example' # The location of the code on the development machine. Use '/' or '\' based on OS.
+    public: '/public' # Path relative to the root of code as it will appear in the vm. (Uses '/' here even if source is on Windows)

@@ -55,7 +55,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell' do |shell|
     modules = '/vagrant/modules'
     app_modules = '/vagrant/app_modules'
-    manifest = "#{app_modules}/app/manifests/local.pp"
+    manifest = "#{app_modules}/app_local/manifests/local.pp"
     hiera_config = '/vagrant/hiera/hiera.yaml'
 
     shell.inline = "puppet apply --hiera_config=#{hiera_config} --modulepath=#{modules}:#{app_modules} #{manifest}"

@@ -14,4 +14,4 @@
 /modules
 
 # Files downloaded from vendor.
-/app_modules/app/files/oracle-*
+/app_modules/app_local/files/oracle-*
