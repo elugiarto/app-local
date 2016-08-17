@@ -38,9 +38,9 @@ Open Source, released under the [MIT License](http://choosealicense.com/licenses
 
 1\. Ensure all [Dependencies](#dependencies) have been resolved.
 
-2\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into `$REPO/app_modules/app_local/files`. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file.
+2\. Define a `$REPO/yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration based on the example provided `$REPO/yaml/developer.example.yaml`.
 
-3\. Define a `$REPO/yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration based on the example provided `$REPO/yaml/developer.example.yaml`.
+3\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into `$REPO/app_modules/app_local/files`. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file for `oracle_instantclient_basic`, `oracle_instantclient_development` and `oracle_instantclient_sqlplus`.
 
 4\. Start and provision VM:
 
