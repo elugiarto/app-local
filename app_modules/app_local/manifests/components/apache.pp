@@ -16,7 +16,7 @@ class app_local::components::apache {
   $sso_dummy_staff_number = 's123456'
   $sso_dummy_given_name = 'Jane'
   $sso_dummy_family_name = 'Doe'
-  $sso_dummy_email = 'jane.doe@notgriffith.edu.au'
+  $sso_dummy_email = 'jane.doe@example.com'
   $sso_dummy_group_memberships = [
     'cn=General Staff (All),ou=Groups,o=Griffith University',
     'cn=Staff (NA),ou=Groups,o=Griffith University'
@@ -230,4 +230,22 @@ class app_local::components::apache {
   }
 
   class { 'app_local::components::oracle::instant_client': }
+
+  #
+  # Install oci8 https://pecl.php.net/package/oci8 for latest PHP 5.5 supported version.
+  #
+  exec { 'install oci8':
+    command => 'pecl install oci8-1.4.10',
+    unless  => 'test -f /usr/lib64/php/modules/oci8.so',
+    require => [
+      Package['php55w-pear'],
+      Class['app_local::components::oracle::instant_client']
+    ],
+  }
+
+  exec { 'restart apache':
+    command     => 'service httpd restart',
+    refreshonly => true,
+    subscribe   => Exec['install oci8'],
+  }
 }
