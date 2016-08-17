@@ -5,40 +5,62 @@
  * specifically for it.
  */
 
+function getCurrentURL()
+{
+    $currentURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+    $currentURL .= $_SERVER["SERVER_NAME"];
+
+    if ($_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443") {
+        $currentURL .= ":".$_SERVER["SERVER_PORT"];
+    }
+    $currentURL .= $_SERVER["REQUEST_URI"];
+
+    return $currentURL;
+}
+
 function singleSignOn()
 {
-  $groupMemberships = array();
-  $affiliations = array();
+  if (isset($_GET['REF']) && !empty($_GET['REF'])) {
 
-  <% @sso_dummy_group_memberships.each do |group_membership| %>
-    $groupMemberships[] = "<%= group_membership %>";
-  <% end %>
+    $groupMemberships = array();
+    $affiliations = array();
 
-  <% @sso_dummy_affiliations.each do |affiliation| %>
-    $affiliations[] = "<%= affiliation %>";
-  <% end %>
+    <% @sso_dummy_group_memberships.each do |group_membership| %>
+      $groupMemberships[] = "<%= group_membership %>";
+    <% end %>
 
-  return array(true, array(
-    "userid" => "<%= @sso_dummy_staff_number %>",
-    "name" => "<%= @sso_dummy_given_name %> <%= @sso_dummy_family_name %>",
-    "emplid" => "<%= @sso_dummy_staff_number %>",
-    "email" => "", // TODO: Currently returned as empty.
-    "roles" => array(), // TODO: Verify this is actually defined in this method.
-    "raw" => array(
-      "mail" => "<%= @sso_dummy_email %>",
-      "partnerEntityID" => "priLoginForm",
-      "sn" => "<%= @sso_dummy_family_name %>",
-      "com.pingidentity.plugin.instanceid" => "agentlessRID",
-      "cn" => "<%= @sso_dummy_staff_number %>",
-      "subject" => "<%= @sso_dummy_staff_number %>",
-      "instanceId" => "agentlessRID",
-      "guAffiliation" => $affiliations,
-      "groupMembership" => $groupMemberships,
-      "givenName" => "<%= @sso_dummy_given_name %>",
-      "sessionid" => "hkMSPDoV2udyupULWBolNfYtl6Y", // TODO: Does this need to be fixed or random for dev purposes?
-      "authnInst" => (new DateTime())->format("o-m-d h:i:sO") // e.g. 2016-07-25 12:31:42+1000
-    )
-  ));
+    <% @sso_dummy_affiliations.each do |affiliation| %>
+      $affiliations[] = "<%= affiliation %>";
+    <% end %>
+
+    return array(true, array(
+      "userid" => "<%= @sso_dummy_staff_number %>",
+      "name" => "<%= @sso_dummy_given_name %> <%= @sso_dummy_family_name %>",
+      "emplid" => "<%= @sso_dummy_staff_number %>",
+      "email" => "", // TODO: Currently returned as empty.
+      "roles" => array(), // TODO: Verify this is actually defined in this method.
+      "raw" => array(
+        "mail" => "<%= @sso_dummy_email %>",
+        "partnerEntityID" => "priLoginForm",
+        "sn" => "<%= @sso_dummy_family_name %>",
+        "com.pingidentity.plugin.instanceid" => "agentlessRID",
+        "cn" => "<%= @sso_dummy_staff_number %>",
+        "subject" => "<%= @sso_dummy_staff_number %>",
+        "instanceId" => "agentlessRID",
+        "guAffiliation" => $affiliations,
+        "groupMembership" => $groupMemberships,
+        "givenName" => "<%= @sso_dummy_given_name %>",
+        "sessionid" => $_GET['REF'],
+        "authnInst" => (new DateTime())->format("o-m-d h:i:sO") // e.g. 2016-07-25 12:31:42+1000
+      )
+    ));
+  } else {
+    // TODO: Get base URL from current request.
+    $redirectTo = "https://localhost:8443/login.php?TargetResource=" . urlencode(getCurrentURL());
+
+    header("Location: " . $redirectTo, true, 302);
+    exit;
+  }
 }
 
 function singleSignonRedirect()

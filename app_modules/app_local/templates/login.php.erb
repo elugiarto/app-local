@@ -1,4 +1,32 @@
 <?php
-echo "SSO Login...";
+echo "SSO Login.";
 
-/* Set SSO session cookies and return REF GET parameter, redirecting back to client. */
+$ref = md5(date('Y-m-d H:i:s'));
+
+/* TODO: Set SSO session cookies and return REF GET parameter, redirecting back to client. */
+
+$targetResource = $_GET["TargetResource"];
+$parts = preg_split("/\?/", $targetResource);
+
+if (count($parts) > 1) {
+  $targetResource = $parts[0];
+}
+?>
+
+<form method="get" action="<?php echo $targetResource; ?>">
+  <input type="hidden" name="REF" value="<?php echo $ref; ?>"/>
+
+  <?php
+  if (count($parts) > 1) {
+    $pairs = preg_split("/=/", $parts[1]);
+
+    if (count($pairs) > 1) {
+      echo "<input type=\"hidden\" name=\"" . $pairs[0] . "\" value=\"" . $pairs[1] . "\"/>";
+    }
+  }
+  ?>
+
+  <button type="submit">Login</button>
+</form>
+
+<a href=

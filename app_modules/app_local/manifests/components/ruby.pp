@@ -54,6 +54,7 @@ class app_local::components::ruby {
     cwd     => "${rbenv}/plugins/ruby-build",
   }
 
+  # TODO: We are seeing errors here, there is something different here to how this command runs from within vm.
   exec { "install ruby ${ruby_version}":
     command => "${rbenv_cli} install ${ruby_version}",
     unless  => "test -d /home/vagrant/.rbenv/versions/${ruby_version}",

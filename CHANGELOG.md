@@ -14,6 +14,7 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 * Add Node and NPM support, along with some commonly used CLI tools.
 * Add Ruby and Bundler support, along with some commonly used CLI tools.
 * Add OCI8 support for PHP to communicate with Oracle databases.
+* Enable SSO emulation.
 
 ### Bug Fixes
 
