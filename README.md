@@ -1,9 +1,14 @@
 
-# App Local
+# App Local [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=master)](https://travis-ci.org/dbtedman/app-local)
 
 Provides a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
-[![Travis CI Test Status](https://travis-ci.org/dbtedman/app-local.svg)](https://travis-ci.org/dbtedman/app-local)
+* [Contributors](#contributors)
+* [Dependencies](#dependencies)
+* [Getting Started](#getting-started)
+* [Testing](#testing)
+* [Services](#services)
+* [Mapped Ports](#mapped-ports)
 
 ## Contributors
 
@@ -17,23 +22,26 @@ Provides a repeatable local development environment that matches an app server i
 * [Vagrant Puppet Install (v4.1)](https://github.com/petems/vagrant-puppet-install)
 * Internet Access
 
-*The following are required when modifying this repository.*
+*The following are **only** required when modifying this repository.*
 
 * [Puppet Lint (v1.1)](http://puppet-lint.com/)
 * [EditorConfig](http://editorconfig.org/#download) (optional)
 
 ## Getting Started
 
-1\. Ensure all [Dependencies](#dependencies) have been satisfied.
+*From now on `$REPO` will refer to the path to this repository as it is checked out on your machine, e.g. `/Users/danieltedman/Workspace/app-local`.*
 
-2\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into `/app_modules/app_local/files`. The names of these files will need to be added to the `heria/developer.yaml` config file.
+1\. Ensure all [Dependencies](#dependencies) have been resolved.
 
-3\. Define a `yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration based on the example provided `yaml/developer.example.yaml`.
+2\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into `$REPO/app_modules/app_local/files`. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file.
+
+3\. Define a `$REPO/yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration based on the example provided `$REPO/yaml/developer.example.yaml`.
 
 4\. Start and provision VM:
 
 ```bash
-# This command starts up the vm and runs the provisioner.
+cd $REPO
+
 vagrant up --provision
 ```
 
@@ -50,6 +58,8 @@ See [https://travis-ci.org/dbtedman/app-local](https://travis-ci.org/dbtedman/ap
 Check for formatting issues and automatically resolve them where possible.
 
 ```bash
+cd $REPO
+
 puppet-lint app_modules/ --fix
 ```
 
