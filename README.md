@@ -4,6 +4,7 @@
 Provides a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
 * [Contributors](#contributors)
+* [License](#license)
 * [Dependencies](#dependencies)
 * [Getting Started](#getting-started)
 * [Testing](#testing)
@@ -13,6 +14,10 @@ Provides a repeatable local development environment that matches an app server i
 ## Contributors
 
 * [Daniel Tedman](http://danieltedman.com)
+
+## License
+
+Open Source, released under the [MIT License](http://choosealicense.com/licenses/mit/), see [LICENSE.md](LICENSE.md) for details.
 
 ## Dependencies
 
@@ -29,7 +34,7 @@ Provides a repeatable local development environment that matches an app server i
 
 ## Getting Started
 
-*From now on `$REPO` will refer to the path to this repository as it is checked out on your machine, e.g. `/Users/danieltedman/Workspace/app-local`.*
+0\. From now on `$REPO` will refer to the path to this repository as it is checked out on your machine, e.g. `/Users/danieltedman/Workspace/app-local`.
 
 1\. Ensure all [Dependencies](#dependencies) have been resolved.
 

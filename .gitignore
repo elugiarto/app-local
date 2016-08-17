@@ -2,13 +2,13 @@
 # Git Ignore Config, https://git-scm.com/docs/gitignore.
 #
 
-# Developer Config
+# Developer specific configuration.
 /hiera/developer.yaml
 
-# Vagrant
+# Vagrant runtime data.
 /.vagrant
 
-# Puppet Librarian
+# Puppet Librarian runtime and vendor files.
 /.librarian
 /.tmp
 /modules
