@@ -27,7 +27,7 @@ Open Source, released under the [MIT License](http://choosealicense.com/licenses
 * [Vagrant Puppet Install (v4.1)](https://github.com/petems/vagrant-puppet-install)
 * Internet Access
 
-*The following are **only** required when modifying this repository.*
+*The following are only required when modifying this repository.*
 
 * [Puppet Lint (v1.1)](http://puppet-lint.com/)
 * [EditorConfig](http://editorconfig.org/#download) (optional)
