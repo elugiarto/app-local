@@ -16,5 +16,5 @@ node 'localhost' {
   class { 'app_local::components::apache': }
   class { 'app_local::components::mysql': }
   class { 'app_local::components::node': }
-  class { 'app_local::components::ruby': }
+  # class { 'app_local::components::ruby': }
 }
