@@ -54,6 +54,8 @@ See [Vagrant CLI](https://www.vagrantup.com/docs/cli) for documentation on to in
 
 5\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
 
+> When mapping new projects into the vm or updating the configuration of existing ones, you will need to run the `vagrant reload --provision` command to apply these changes.
+
 ## Testing
 
 See [https://travis-ci.org/dbtedman/app-local](https://travis-ci.org/dbtedman/app-local) for CI results, run on each commit.
