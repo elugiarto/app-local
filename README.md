@@ -22,7 +22,7 @@ Open Source, released under the [MIT License](http://choosealicense.com/licenses
 *The following are only required when modifying this repository.*
 
 * [Puppet Lint (v1.1)](http://puppet-lint.com/)
-* [EditorConfig](http://editorconfig.org/#download) (optional)
+* [EditorConfig](http://editorconfig.org/#download)
 
 ## Getting Started
 
@@ -61,7 +61,7 @@ Check for formatting issues and automatically resolve them where possible.
 ```bash
 cd $REPO
 
-puppet-lint app_modules/ --fix
+puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
 ```
 
 ## Services

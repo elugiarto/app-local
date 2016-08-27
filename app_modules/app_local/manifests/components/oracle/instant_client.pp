@@ -42,18 +42,18 @@ class app_local::components::oracle::instant_client {
       ensure  => 'installed';
 
     'oracle-instantclient-basic':
+      ensure          => 'installed',
       provider        => 'rpm',
       name            => $instant_client_basic,
       source          => "/tmp/${instant_client_basic}",
-      ensure          => 'installed',
       install_options => '--force',
       require         => File["/tmp/${instant_client_basic}"];
 
     'oracle-instantclient-devel':
+      ensure          => 'installed',
       provider        => 'rpm',
       name            => $instant_client_development,
       source          => "/tmp/${instant_client_development}",
-      ensure          => 'installed',
       install_options => '--force',
       require         => [
         File["/tmp/${instant_client_development}"],
@@ -61,10 +61,10 @@ class app_local::components::oracle::instant_client {
       ];
 
     'oracle-instantclient-sqlplus':
+      ensure          => 'installed',
       provider        => 'rpm',
       name            => $instant_client_sqlplus,
       source          => "/tmp/${instant_client_sqlplus}",
-      ensure          => 'installed',
       install_options => '--force',
       require         => [
         File["/tmp/${instant_client_sqlplus}"],

@@ -21,9 +21,9 @@ class app_local::components::oracle::xe {
     source => "puppet:///modules/${module_name}/${xe_zip}"
   }
 
-  exec { "unzip xe":
+  exec { 'unzip xe':
     command => "unzip /tmp/${xe_zip}",
-    cwd     => "/tmp",
+    cwd     => '/tmp',
     unless  => "test -e ${xe_rpm}",
     user    => 'vagrant',
     group   => 'vagrant',
@@ -43,13 +43,13 @@ class app_local::components::oracle::xe {
     source          => $xe_rpm,
     require         => [
       Class['app_local::components::oracle::instant_client'],
-      Exec["unzip xe"],
+      Exec['unzip xe'],
       Package['glibc', 'make', 'binutils', 'gcc', 'libaio', 'bc', 'flex'],
       Swap_file::Files['default'],
     ]
   }
 
-  file { "/tmp/xe.rsp":
+  file { '/tmp/xe.rsp':
     ensure  => 'file',
     owner   => 'vagrant',
     group   => 'vagrant',
@@ -58,10 +58,10 @@ class app_local::components::oracle::xe {
   }
 
   exec { 'configure oracle-xe':
-    command => "/etc/init.d/oracle-xe configure responseFile=/tmp/xe.rsp",
-    cwd     => "/tmp",
+    command => '/etc/init.d/oracle-xe configure responseFile=/tmp/xe.rsp',
+    cwd     => '/tmp',
     user    => 'root',
     group   => 'root',
-    require => File["/tmp/xe.rsp"],
+    require => File['/tmp/xe.rsp'],
   }
 }
