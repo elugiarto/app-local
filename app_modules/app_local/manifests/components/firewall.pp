@@ -8,16 +8,26 @@ class app_local::components::firewall {
 
   class { 'firewall': }
 
-  # HTTPS access to apache httpd.
   firewall { '100 allow https access':
     dport  => [443],
     proto  => tcp,
     action => accept,
   }
 
-  # MySQL database access.
   firewall { '100 allow mysql access':
     dport  => [3306],
+    proto  => tcp,
+    action => accept,
+  }
+
+  firewall { '100 allow oracle xe website access':
+    dport  => [8888],
+    proto  => tcp,
+    action => accept,
+  }
+
+  firewall { '100 allow oracle xe access':
+    dport  => [1521],
     proto  => tcp,
     action => accept,
   }

@@ -16,6 +16,12 @@ oracle_instantclient_development: ''
 oracle_instantclient_sqlplus: ''
 
 #
+# Oracle XE config.
+#
+oracle_xe: ''
+oracle_xe_root_password: ''
+
+#
 # MySQL database configuration.
 #
 # The 'testdb' key is the name of the database, change this to change the database name. The

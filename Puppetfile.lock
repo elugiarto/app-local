@@ -1,7 +1,11 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
+    fiddyspence-sysctl (1.1.0)
     nanliu-staging (1.0.3)
+    petems-swap_file (3.0.1)
+      fiddyspence-sysctl (= 1.1.0)
+      puppetlabs-stdlib (>= 4.7.0)
     puppetlabs-apache (1.10.0)
       puppetlabs-concat (< 3.0.0, >= 1.1.1)
       puppetlabs-stdlib (< 5.0.0, >= 2.4.0)
@@ -16,6 +20,7 @@ FORGE
       puppetlabs-stdlib (>= 3.0.0)
 
 DEPENDENCIES
+  petems-swap_file (= 3.0.1)
   puppetlabs-apache (= 1.10.0)
   puppetlabs-firewall (= 1.8.0)
   puppetlabs-mysql (= 3.7.0)

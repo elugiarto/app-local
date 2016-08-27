@@ -15,6 +15,7 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 * Add Ruby and Bundler support, along with some commonly used CLI tools.
 * Add OCI8 support for PHP to communicate with Oracle databases.
 * Enable SSO emulation.
+* Oracle XE Database support.
 
 ### Bug Fixes
 

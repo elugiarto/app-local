@@ -3,14 +3,6 @@
 
 Provides a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
-* [Contributors](#contributors)
-* [License](#license)
-* [Dependencies](#dependencies)
-* [Getting Started](#getting-started)
-* [Testing](#testing)
-* [Services](#services)
-* [Mapped Ports](#mapped-ports)
-
 ## Contributors
 
 * [Daniel Tedman](http://danieltedman.com)
@@ -40,9 +32,11 @@ Open Source, released under the [MIT License](http://choosealicense.com/licenses
 
 2\. Define a `$REPO/yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration based on the example provided `$REPO/yaml/developer.example.yaml`.
 
-3\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into `$REPO/app_modules/app_local/files`. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file for `oracle_instantclient_basic`, `oracle_instantclient_development` and `oracle_instantclient_sqlplus`.
+3\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into `$REPO/app_modules/app_local/files`. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file for `oracle_instantclient_basic`, `oracle_instantclient_development` and `oracle_instantclient_sqlplus` properties.
 
-4\. Start and provision VM:
+4\. Download [Oracle XE Zip](http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) into `$REPO/app_modules/app_local/files`. The name of this file will need to be added to the `$REPO/heria/developer.yaml` config file for the `oracle_xe` property.
+
+5\. Start and provision VM:
 
 ```bash
 cd $REPO
@@ -52,7 +46,7 @@ vagrant up --provision
 
 See [Vagrant CLI](https://www.vagrantup.com/docs/cli) for documentation on to interact with the vm.
 
-5\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
+6\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
 
 > When mapping new projects into the vm or updating the configuration of existing ones, you will need to run the `vagrant reload --provision` command to apply these changes.
 
@@ -78,6 +72,7 @@ To `start`/`stop`/`restart`/`status` services, use the following commands:
 |:---|:---|
 | Apache | `sudo service httpd status` |
 | MySQL | `sudo service mysql status` |
+| Oracle XE | ` ` |
 
 
 ## Mapped Ports
@@ -86,3 +81,5 @@ To `start`/`stop`/`restart`/`status` services, use the following commands:
 |:---|:---|
 | `8443` | HTTPS website, [https://localhost:8443](https://localhost:8443). |
 | `3306` | Workstation access to MySQL database. |
+| `8888` | Oracle XE configuration website. |
+| `1521` | Workstation access to Oracle XE database. |
