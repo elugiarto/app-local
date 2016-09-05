@@ -39,10 +39,14 @@ Vagrant.configure(2) do |config|
   config.vm.define 'localhost' do |app|
     app.vm.hostname = 'localhost'
 
+    # TODO: Allow these to be configured in developer.yaml.
     app.vm.network 'forwarded_port', guest: 443, host: 8443, host_ip: '127.0.0.1'
     app.vm.network 'forwarded_port', guest: 3306, host: 3306, host_ip: '127.0.0.1'
-    app.vm.network 'forwarded_port', guest: 8888, host: 8888, host_ip: '127.0.0.1'
-    app.vm.network 'forwarded_port', guest: 1521, host: 1521, host_ip: '127.0.0.1'
+
+    if developer.has_key? 'enable_oracle_xe' and developer['enable_oracle_xe'] == true
+      app.vm.network 'forwarded_port', guest: 8888, host: 8888, host_ip: '127.0.0.1'
+      app.vm.network 'forwarded_port', guest: 1521, host: 1521, host_ip: '127.0.0.1'
+    end
 
     if developer.has_key? 'projects'
       developer['projects'].each_pair do |to, from|

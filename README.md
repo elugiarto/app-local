@@ -34,7 +34,9 @@ Open Source, released under the [MIT License](http://choosealicense.com/licenses
 
 3\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into `$REPO/app_modules/app_local/files`. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file for `oracle_instantclient_basic`, `oracle_instantclient_development` and `oracle_instantclient_sqlplus` properties.
 
-4\. Download [Oracle XE Zip](http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) into `$REPO/app_modules/app_local/files`. The name of this file will need to be added to the `$REPO/heria/developer.yaml` config file for the `oracle_xe` property.
+4\. (Optional) Download [Oracle XE Zip](http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) into `$REPO/app_modules/app_local/files`. The name of this file will need to be added to the `$REPO/heria/developer.yaml` config file for the `oracle_xe` property.
+
+> This step is only required if you have enabled the associated **feature toggle**.
 
 5\. Start and provision VM:
 
@@ -63,6 +65,15 @@ cd $REPO
 
 puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
 ```
+
+## Feature Toggles
+
+Some functionality may be in development or be inappropriate to always be run for other reasons, feature toggles enable this functionality to be disabled or enabled in the `developer.yaml` configuration file.
+
+| Feature | Config Property | Default | Comment |
+|:---|:---|:---|:---|
+| Oracle XE Database | `enable_oracle_xe` | `false` | Install process is currently buggy so this feature has been disabled by default. |
+| Vagrant SSH Key Setup | `disable_ssh_key_insert` | `false` | New versions of Vagrant may have issues when setting up a new vm with the ssh key copy phase. Set this property to `true` if you see this issue. |
 
 ## Services
 

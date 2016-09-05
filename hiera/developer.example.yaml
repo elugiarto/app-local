@@ -9,6 +9,12 @@
 disable_ssh_key_insert: false
 
 #
+# When set to true, the oracle xe database will be installed and configured. Oracle XE database install is currently
+# buggy so it has been disabled by default.
+#
+enable_oracle_xe: false
+
+#
 # RPM files downloaded in dependencies instructions, add just the file names here not their full path.
 #
 oracle_instantclient_basic: ''

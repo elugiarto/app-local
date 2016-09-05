@@ -16,6 +16,7 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 * Add OCI8 support for PHP to communicate with Oracle databases.
 * Enable SSO emulation.
 * Oracle XE Database support.
+* Add feature toggles.
 
 ### Bug Fixes
 
