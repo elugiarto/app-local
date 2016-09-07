@@ -229,6 +229,10 @@ class app_local::components::apache {
     ],
   }
 
+  package { 'composer':
+    ensure  => 'installed',
+  }
+
   class { 'app_local::components::oracle::instant_client': }
 
   #
