@@ -39,13 +39,27 @@ Vagrant.configure(2) do |config|
   config.vm.define 'localhost' do |app|
     app.vm.hostname = 'localhost'
 
+    listen_ports = {}
+
+    if developer.has_key? 'listen_ports'
+      listen_ports['https'] = developer['listen_ports']['https']
+      listen_ports['mysql'] = developer['listen_ports']['mysql']
+      listen_ports['oracle_xe'] = developer['listen_ports']['oracle_xe']
+      listen_ports['oracle_xe_web'] = developer['listen_ports']['oracle_xe_web']
+    else
+      listen_ports['https'] = 8443
+      listen_ports['mysql'] = 3306
+      listen_ports['oracle_xe'] = 1521
+      listen_ports['oracle_xe_web'] = 8888
+    end
+
     # TODO: Allow these to be configured in developer.yaml.
-    app.vm.network 'forwarded_port', guest: 443, host: 8443, host_ip: '127.0.0.1'
-    app.vm.network 'forwarded_port', guest: 3306, host: 3306, host_ip: '127.0.0.1'
+    app.vm.network 'forwarded_port', guest: 443, host: listen_ports['https'], host_ip: '127.0.0.1'
+    app.vm.network 'forwarded_port', guest: 3306, host: listen_ports['mysql'], host_ip: '127.0.0.1'
 
     if developer.has_key? 'enable_oracle_xe' and developer['enable_oracle_xe'] == true
-      app.vm.network 'forwarded_port', guest: 8888, host: 8888, host_ip: '127.0.0.1'
-      app.vm.network 'forwarded_port', guest: 1521, host: 1521, host_ip: '127.0.0.1'
+      app.vm.network 'forwarded_port', guest: 8888, host: listen_ports['oracle_xe'] , host_ip: '127.0.0.1'
+      app.vm.network 'forwarded_port', guest: 1521, host: listen_ports['oracle_xe_web'], host_ip: '127.0.0.1'
     end
 
     if developer.has_key? 'projects'

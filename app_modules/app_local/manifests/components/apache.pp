@@ -12,6 +12,15 @@ class app_local::components::apache {
   $doc_source = '/app/source'
   $security_key = '/app/security key'
 
+  $listen_ports = hiera('listen_ports')
+
+  if ($listen_ports) {
+    $base_url = "https://localhost:${listen_ports['https']}"
+
+  } else {
+    $base_url = 'https://localhost:8443' # Default configuration.
+  }
+
   # TODO: Provide defaults and allow override in hiera.
   $sso_dummy_staff_number = 's123456'
   $sso_dummy_given_name = 'Jane'
@@ -75,7 +84,7 @@ class app_local::components::apache {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("${module_name}/pingsinglesignon.php.erb"),
+    content => template("${module_name}/pingsinglesignon.erb"),
     require => File[$security_key],
   }
 

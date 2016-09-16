@@ -55,8 +55,7 @@ function singleSignOn()
       )
     ));
   } else {
-    // TODO: Get base URL from current request.
-    $redirectTo = "https://localhost:8443/login.php?TargetResource=" . urlencode(getCurrentURL());
+    $redirectTo = "<%= @base_url %>/login.php?TargetResource=" . urlencode(getCurrentURL());
 
     header("Location: " . $redirectTo, true, 302);
     exit;
@@ -65,10 +64,10 @@ function singleSignOn()
 
 function singleSignonRedirect()
 {
-  return "/login.php";
+  return "<%= @base_url %>/login.php";
 }
 
 function getPSLogoutByEnv()
 {
-  return "/logout.php";
+  return "<%= @base_url %>/logout.php";
 }

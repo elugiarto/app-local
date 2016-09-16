@@ -3,6 +3,15 @@
 #
 
 #
+# Used to customise which ports are mapped to on a developers workstation.
+#
+listen_ports:
+  https: 8443
+  mysql: 3306
+  oracle_xe: 1521
+  oracle_xe_web: 8888
+
+#
 # Set to true if you get ssh auth errors when provisioning vm. This will stop vagrant from trying to
 # replace the ssh keys that came with the base VM box.
 #
