@@ -41,6 +41,9 @@ Vagrant.configure(2) do |config|
 
     listen_ports = {}
 
+    #
+    # Custom port mapping configuration.
+    #
     if developer.has_key? 'listen_ports'
       listen_ports['https'] = developer['listen_ports']['https']
       listen_ports['mysql'] = developer['listen_ports']['mysql']
@@ -53,7 +56,6 @@ Vagrant.configure(2) do |config|
       listen_ports['oracle_xe_web'] = 8888
     end
 
-    # TODO: Allow these to be configured in developer.yaml.
     app.vm.network 'forwarded_port', guest: 443, host: listen_ports['https'], host_ip: '127.0.0.1'
     app.vm.network 'forwarded_port', guest: 3306, host: listen_ports['mysql'], host_ip: '127.0.0.1'
 
