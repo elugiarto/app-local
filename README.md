@@ -70,11 +70,6 @@ puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
 
 Some functionality may be in development or be inappropriate to always be run for other reasons, feature toggles enable this functionality to be disabled or enabled in the `developer.yaml` configuration file.
 
-| Feature | Config Property | Default | Comment |
-|:---|:---|:---|:---|
-| Oracle XE Database | `enable_oracle_xe` | `false` | Install process is currently buggy so this feature has been disabled by default. |
-| Vagrant SSH Key Setup | `disable_ssh_key_insert` | `false` | New versions of Vagrant may have issues when setting up a new vm with the ssh key copy phase. Set this property to `true` if you see this issue. |
-
 ## Services
 
 To `start`/`stop`/`restart`/`status` services, use the following commands:
@@ -83,10 +78,11 @@ To `start`/`stop`/`restart`/`status` services, use the following commands:
 |:---|:---|
 | Apache | `sudo service httpd status` |
 | MySQL | `sudo service mysql status` |
-| Oracle XE | ` ` |
 
 
 ## Mapped Ports
+
+This configuration can be overridden in the `hiera/developer.yaml` configuration file.
 
 | Port | Purpose |
 |:---|:---|
