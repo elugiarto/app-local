@@ -15,8 +15,8 @@ Open Source, released under the [MIT License](http://choosealicense.com/licenses
 
 * [Virtual Box (v5.1)](https://www.virtualbox.org/)
 * [Vagrant (v1.8)](https://www.vagrantup.com)
-* [Vagrant Librarian Puppet (v0.9)](https://github.com/mhahn/vagrant-librarian-puppet)
-* [Vagrant Puppet Install (v4.1)](https://github.com/petems/vagrant-puppet-install)
+* [Vagrant Librarian Puppet (v0.9)](https://github.com/mhahn/vagrant-librarian-puppet) `vagrant plugin install vagrant-librarian-puppet`
+* [Vagrant Puppet Install (v4.1)](https://github.com/petems/vagrant-puppet-install) `vagrant plugin install vagrant-puppet-install`
 * Internet Access
 
 *The following are only required when modifying this repository.*
@@ -26,19 +26,15 @@ Open Source, released under the [MIT License](http://choosealicense.com/licenses
 
 ## Getting Started
 
-0\. From now on `$REPO` will refer to the path to this repository as it is checked out on your machine, e.g. `/Users/danieltedman/Workspace/app-local`.
+> For simplicity `$REPO` will refer to the path to this repository as it is checked out on your machine, e.g. `/Users/danieltedman/Workspace/app-local`.
 
 1\. Ensure all [Dependencies](#dependencies) have been resolved.
 
-2\. Define a `$REPO/yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration based on the example provided `$REPO/yaml/developer.example.yaml`.
+2\. Define a `$REPO/yaml/developer.yaml` configuration file to customise Puppet and Vagrant configuration by duplicating the example configuration file `$REPO/yaml/developer.example.yaml`.
 
-3\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into `$REPO/app_modules/app_local/files`. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file for `oracle_instantclient_basic`, `oracle_instantclient_development` and `oracle_instantclient_sqlplus` properties.
+3\. Download [Oracle InstantClient RPMs](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into the `$REPO/app_modules/app_local/files` directory. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file for `oracle_instantclient_basic`, `oracle_instantclient_development` and `oracle_instantclient_sqlplus` properties.
 
-4\. (Optional) Download [Oracle XE Zip](http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) into `$REPO/app_modules/app_local/files`. The name of this file will need to be added to the `$REPO/heria/developer.yaml` config file for the `oracle_xe` property.
-
-> This step is only required if you have enabled the associated **feature toggle**.
-
-5\. Start and provision VM:
+4\. Start and provision the virtual machine.
 
 ```bash
 cd $REPO
@@ -46,7 +42,7 @@ cd $REPO
 vagrant up --provision
 ```
 
-See [Vagrant CLI](https://www.vagrantup.com/docs/cli) for documentation on to interact with the vm.
+> See [Vagrant CLI](https://www.vagrantup.com/docs/cli) for documentation on how to interact with the vm.
 
 6\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
 
@@ -65,28 +61,3 @@ cd $REPO
 
 puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
 ```
-
-## Feature Toggles
-
-Some functionality may be in development or be inappropriate to always be run for other reasons, feature toggles enable this functionality to be disabled or enabled in the `developer.yaml` configuration file.
-
-## Services
-
-To `start`/`stop`/`restart`/`status` services, use the following commands:
-
-| Service | Command |
-|:---|:---|
-| Apache | `sudo service httpd status` |
-| MySQL | `sudo service mysql status` |
-
-
-## Mapped Ports
-
-This configuration can be overridden in the `hiera/developer.yaml` configuration file.
-
-| Port | Purpose |
-|:---|:---|
-| `8443` | HTTPS website, [https://localhost:8443](https://localhost:8443). |
-| `3306` | Workstation access to MySQL database. |
-| `8888` | Oracle XE configuration website. |
-| `1521` | Workstation access to Oracle XE database. |
