@@ -2,16 +2,19 @@
 # Git Ignore Config, https://git-scm.com/docs/gitignore.
 #
 
+# Keep files, allows for empty directories in git.
+!.keep
+
 # Developer specific configuration.
 /hiera/developer.yaml
 
 # Vagrant runtime data.
-/.vagrant
+/.vagrant/
 
 # Puppet Librarian runtime and vendor files.
-/.librarian
-/.tmp
-/modules
+/.librarian/
+/.tmp/
+/modules/
 
 # Files downloaded from vendor.
 /app_modules/app_local/files/oracle-*

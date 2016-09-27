@@ -9,7 +9,6 @@ class app_local::components::oracle::instant_client {
   $instant_client_basic = hiera('oracle_instantclient_basic', '')
   $instant_client_development = hiera('oracle_instantclient_development', '')
   $instant_client_sqlplus = hiera('oracle_instantclient_sqlplus', '')
-  $answer_pecl_oci8 = 'answer-pecl-oci8.txt'
   $java_version = '1.8.0'
   $instant_client_version = '12.1' # TODO: Determine dynamically from above rpms.
 

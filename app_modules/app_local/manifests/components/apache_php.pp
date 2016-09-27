@@ -5,7 +5,7 @@
 # Required Modules:
 #   https://forge.puppet.com/puppetlabs/apache
 #
-class app_local::components::apache {
+class app_local::components::apache_php {
 
   $app_root = '/app'
   $doc_root = '/app/web'
@@ -21,19 +21,19 @@ class app_local::components::apache {
     $base_url = 'https://localhost:8443' # Default configuration.
   }
 
-  # TODO: Provide defaults and allow override in hiera.
-  $sso_dummy_staff_number = 's123456'
-  $sso_dummy_given_name = 'Jane'
-  $sso_dummy_family_name = 'Doe'
-  $sso_dummy_email = 'jane.doe@example.com'
-  $sso_dummy_group_memberships = [
+  $sso_dummy_staff_number = hiera('sso_dummy_staff_number', 's123456')
+  $sso_dummy_given_name = hiera('sso_dummy_given_name', 'Jane')
+  $sso_dummy_family_name = hiera('sso_dummy_family_name', 'Doe')
+  $sso_dummy_email = hiera('sso_dummy_email', 'jane.doe@example.com')
+  $sso_dummy_group_memberships = hiera('sso_dummy_group_memberships', [
     'cn=General Staff (All),ou=Groups,o=Griffith University',
     'cn=Staff (NA),ou=Groups,o=Griffith University'
-  ]
-  $sso_dummy_affiliations = [
+  ])
+  $sso_dummy_affiliations = hiera('sso_dummy_affiliations', [
     'EMPLOYEE',
     'GENERAL'
-  ]
+  ])
+
   $path = '/usr/local/bin:/usr/bin:/bin'
 
   $projects = hiera('projects', [])
@@ -88,24 +88,6 @@ class app_local::components::apache {
     require => File[$security_key],
   }
 
-  file { "${doc_root}/logout.php":
-    ensure  => 'file',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template("${module_name}/logout.php.erb"),
-    require => File[$doc_root],
-  }
-
-  file { "${doc_root}/login.php":
-    ensure  => 'file',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template("${module_name}/login.php.erb"),
-    require => File[$doc_root],
-  }
-
   file { '/etc/php.ini':
     ensure  => 'file',
     owner   => 'root',
@@ -114,6 +96,7 @@ class app_local::components::apache {
     content => template("${module_name}/php.ini.erb"),
   }
 
+  # TODO: Review actual apache config on server to better emulate it.
   apache::vhost { 'localhost':
     port        => '443',
     docroot     => $doc_root,
@@ -167,86 +150,54 @@ class app_local::components::apache {
     ],
   }
 
+  package { ['php55w-common', 'php55w-opcache', 'php55w-mysql', 'php55w-pdo', 'php55w-odbc',
+    'php55w-pgsql', 'php55w-devel', 'php55w-cli', 'php55w-pear', 'composer' ]:
+    ensure  => 'installed',
+    require => [
+      Package['php55w'],
+    ],
+  }
+
   file { "${doc_root}/about.php":
     ensure  => 'file',
     owner   => 'vagrant',
     group   => 'vagrant',
     content => '<?php phpinfo();',
-    require => Class['apache::mod::php']
-  }
-
-  package { 'php55w-opcache':
-    ensure  => 'installed',
     require => [
-      Package['php55w'],
+      File[$doc_root],
+      Class['apache::mod::php'],
     ],
   }
 
-  package { 'php55w-mysql':
-    ensure  => 'installed',
+  # SSO emulated logout page.
+  file { "${doc_root}/logout.php":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("${module_name}/logout.php.erb"),
     require => [
-      Package['php55w'],
+      File[$doc_root],
+      Class['apache::mod::php'],
     ],
   }
 
-  package { 'php55w-pdo':
-    ensure  => 'installed',
+  # SSO emulated login page.
+  file { "${doc_root}/login.php":
+    ensure  => 'file',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template("${module_name}/login.php.erb"),
     require => [
-      Package['php55w'],
+      File[$doc_root],
+      Class['apache::mod::php'],
     ],
-  }
-
-  package { 'php55w-odbc':
-    ensure  => 'installed',
-    require => [
-      Package['php55w'],
-    ],
-  }
-
-  package { 'php55w-pgsql':
-    ensure  => 'installed',
-    require => [
-      Package['php55w'],
-    ],
-  }
-
-  package { 'php55w-devel':
-    ensure  => 'installed',
-    require => [
-      Package['php55w'],
-    ],
-  }
-
-  package { 'php55w-common':
-    ensure  => 'installed',
-    require => [
-      Package['php55w'],
-    ],
-  }
-
-  package { 'php55w-cli':
-    ensure  => 'installed',
-    require => [
-      Package['php55w'],
-    ],
-  }
-
-  package { 'php55w-pear':
-    ensure  => 'installed',
-    require => [
-      Package['php55w'],
-    ],
-  }
-
-  package { 'composer':
-    ensure  => 'installed',
   }
 
   class { 'app_local::components::oracle::instant_client': }
 
-  #
   # Install oci8 https://pecl.php.net/package/oci8 for latest PHP 5.5 supported version.
-  #
   exec { 'install oci8':
     command => 'pecl install oci8-1.4.10',
     unless  => 'test -f /usr/lib64/php/modules/oci8.so',

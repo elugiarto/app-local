@@ -8,20 +8,12 @@
 listen_ports:
   https: 8443
   mysql: 3306
-  oracle_xe: 1521
-  oracle_xe_web: 8888
 
 #
 # Set to true if you get ssh auth errors when provisioning vm. This will stop vagrant from trying to
 # replace the ssh keys that came with the base VM box.
 #
 disable_ssh_key_insert: false
-
-#
-# When set to true, the oracle xe database will be installed and configured. Oracle XE database install is currently
-# buggy so it has been disabled by default.
-#
-enable_oracle_xe: false
 
 #
 # RPM files downloaded in dependencies instructions, add just the file names here not their full path.
@@ -31,10 +23,18 @@ oracle_instantclient_development: ''
 oracle_instantclient_sqlplus: ''
 
 #
-# Oracle XE config.
+# SSO Demo Data
 #
-oracle_xe: ''
-oracle_xe_root_password: ''
+sso_dummy_staff_number: 's123456'
+sso_dummy_given_name: 'Jane'
+sso_dummy_family_name: 'Doe'
+sso_dummy_email: 'jane.doe@example.com'
+sso_dummy_group_memberships:
+  - 'cn=General Staff (All),ou=Groups,o=Griffith University'
+  - 'cn=Staff (NA),ou=Groups,o=Griffith University'
+sso_dummy_affiliations:
+  - 'EMPLOYEE'
+  - 'GENERAL'
 
 #
 # MySQL database configuration.
