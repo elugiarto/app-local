@@ -1,5 +1,5 @@
 #
-# Ruby Configuration.
+# Ruby Configuration and useful global packages.
 #
 class app_local::components::ruby {
 

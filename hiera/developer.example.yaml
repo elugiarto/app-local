@@ -23,7 +23,7 @@ oracle_instantclient_development: ''
 oracle_instantclient_sqlplus: ''
 
 #
-# SSO Demo Data
+# SSO Demo Data. Update these to emulate a different user or a user with different access.
 #
 sso_dummy_staff_number: 's123456'
 sso_dummy_given_name: 'Jane'
@@ -39,8 +39,8 @@ sso_dummy_affiliations:
 #
 # MySQL database configuration.
 #
-# The 'testdb' key is the name of the database, change this to change the database name. The
-# 'testuser' key is the username being created, change this to change the username being created.
+# The 'testdb' key is the name of the database, change this to change the database name.
+# The 'testuser' key is the username being created, change this to change the username being created.
 #
 mysql:
   root_password: 'password'
