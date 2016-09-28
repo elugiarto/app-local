@@ -77,6 +77,6 @@ class app_local::components::oracle::instant_client {
     }
 
   } else {
-    err("oracle_instantclient_basic must be defined and populated.")
+    err('oracle_instantclient_basic must be defined and populated.')
   }
 }

@@ -19,16 +19,4 @@ class app_local::components::firewall {
     proto  => tcp,
     action => accept,
   }
-
-  firewall { '100 allow oracle xe website access':
-    dport  => [8888],
-    proto  => tcp,
-    action => accept,
-  }
-
-  firewall { '100 allow oracle xe access':
-    dport  => [1521],
-    proto  => tcp,
-    action => accept,
-  }
 }

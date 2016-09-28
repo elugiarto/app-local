@@ -1,5 +1,8 @@
 #
-# Ruby Configuration and useful global packages.
+# Ruby install and useful global packages.
+#
+# Required Modules:
+#   https://forge.puppet.com/stahnma/epel
 #
 class app_local::components::ruby {
 

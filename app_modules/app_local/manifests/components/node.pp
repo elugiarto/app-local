@@ -1,5 +1,5 @@
 #
-# NodeJS Configuration.
+# NodeJS and MPM install.
 #
 # Required Modules:
 #   https://forge.puppet.com/stahnma/epel
