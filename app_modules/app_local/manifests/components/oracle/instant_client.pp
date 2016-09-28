@@ -9,65 +9,74 @@ class app_local::components::oracle::instant_client {
   $instant_client_basic = hiera('oracle_instantclient_basic', '')
   $instant_client_development = hiera('oracle_instantclient_development', '')
   $instant_client_sqlplus = hiera('oracle_instantclient_sqlplus', '')
+
   $java_version = '1.8.0'
-  $instant_client_version = '12.1' # TODO: Determine dynamically from above rpms.
 
-  file {
-    "/tmp/${instant_client_basic}":
-      source => "puppet:///modules/${module_name}/${instant_client_basic}";
+  if ($instant_client_basic != '') {
 
-    "/tmp/${instant_client_development}":
-      source => "puppet:///modules/${module_name}/${instant_client_development}";
+    # This is required for /etc/profile.d/oracle.sh
+    $instant_client_version = $instant_client_basic.match(/[a-z\-]+([0-9\.]+).+/)[1]
 
-    "/tmp/${instant_client_sqlplus}":
-      source => "puppet:///modules/${module_name}/${instant_client_sqlplus}";
+    file {
+      "/tmp/${instant_client_basic}":
+        source => "puppet:///modules/${module_name}/${instant_client_basic}";
 
-    '/etc/profile.d/oracle.sh':
-      ensure  => 'file',
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0655',
-      content => template("${module_name}/oracle.sh.erb"),
-      require => [
-        Package["java-${java_version}-openjdk-devel"],
-        Package['oracle-instantclient-basic'],
-        Package['oracle-instantclient-devel'],
-        Package['oracle-instantclient-sqlplus'],
-      ];
-  }
+      "/tmp/${instant_client_development}":
+        source => "puppet:///modules/${module_name}/${instant_client_development}";
 
-  package {
-    "java-${java_version}-openjdk-devel":
-      ensure  => 'installed';
+      "/tmp/${instant_client_sqlplus}":
+        source => "puppet:///modules/${module_name}/${instant_client_sqlplus}";
 
-    'oracle-instantclient-basic':
-      ensure          => 'installed',
-      provider        => 'rpm',
-      name            => $instant_client_basic,
-      source          => "/tmp/${instant_client_basic}",
-      install_options => '--force',
-      require         => File["/tmp/${instant_client_basic}"];
+      '/etc/profile.d/oracle.sh':
+        ensure  => 'file',
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0655',
+        content => template("${module_name}/oracle.sh.erb"),
+        require => [
+          Package["java-${java_version}-openjdk-devel"],
+          Package['oracle-instantclient-basic'],
+          Package['oracle-instantclient-devel'],
+          Package['oracle-instantclient-sqlplus'],
+        ];
+    }
 
-    'oracle-instantclient-devel':
-      ensure          => 'installed',
-      provider        => 'rpm',
-      name            => $instant_client_development,
-      source          => "/tmp/${instant_client_development}",
-      install_options => '--force',
-      require         => [
-        File["/tmp/${instant_client_development}"],
-        Package['oracle-instantclient-basic'],
-      ];
+    package {
+      "java-${java_version}-openjdk-devel":
+        ensure  => 'installed';
 
-    'oracle-instantclient-sqlplus':
-      ensure          => 'installed',
-      provider        => 'rpm',
-      name            => $instant_client_sqlplus,
-      source          => "/tmp/${instant_client_sqlplus}",
-      install_options => '--force',
-      require         => [
-        File["/tmp/${instant_client_sqlplus}"],
-        Package['oracle-instantclient-devel'],
-      ];
+      'oracle-instantclient-basic':
+        ensure          => 'installed',
+        provider        => 'rpm',
+        name            => $instant_client_basic,
+        source          => "/tmp/${instant_client_basic}",
+        install_options => '--force',
+        require         => File["/tmp/${instant_client_basic}"];
+
+      'oracle-instantclient-devel':
+        ensure          => 'installed',
+        provider        => 'rpm',
+        name            => $instant_client_development,
+        source          => "/tmp/${instant_client_development}",
+        install_options => '--force',
+        require         => [
+          File["/tmp/${instant_client_development}"],
+          Package['oracle-instantclient-basic'],
+        ];
+
+      'oracle-instantclient-sqlplus':
+        ensure          => 'installed',
+        provider        => 'rpm',
+        name            => $instant_client_sqlplus,
+        source          => "/tmp/${instant_client_sqlplus}",
+        install_options => '--force',
+        require         => [
+          File["/tmp/${instant_client_sqlplus}"],
+          Package['oracle-instantclient-devel'],
+        ];
+    }
+
+  } else {
+    err("oracle_instantclient_basic must be defined and populated.")
   }
 }

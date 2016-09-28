@@ -3,7 +3,14 @@
 
 Releases ordered so that the most recent are displayed at the top, with the currently being developed release at the top, labeled as **In Development**. This release will be given a number once it is ready to be released. Each release can contain both a **Features and Improvements** and **Bug Fixes** sections.
 
-## 0.1.0
+## In Development [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=master)](https://travis-ci.org/dbtedman/app-local)
+
+### Features and Improvements
+
+* Add better support for versions of InstantClient after `12.1`.
+* Clean up port mapping in `Vagrantfile`.
+
+## 0.1.0 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.1.0)](https://travis-ci.org/dbtedman/app-local)
 
 ### Features and Improvements
 

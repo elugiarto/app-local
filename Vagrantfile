@@ -39,21 +39,16 @@ Vagrant.configure(2) do |config|
   config.vm.define 'localhost' do |app|
     app.vm.hostname = 'localhost'
 
-    listen_ports = {}
+    listen_https = 8443
+    listen_mysql = 3306
 
-    #
-    # Custom port mapping configuration.
-    #
     if developer.has_key? 'listen_ports'
-      listen_ports['https'] = developer['listen_ports']['https']
-      listen_ports['mysql'] = developer['listen_ports']['mysql']
-    else
-      listen_ports['https'] = 8443
-      listen_ports['mysql'] = 3306
+      listen_https = developer['listen_ports']['https']
+      listen_mysql = developer['listen_ports']['mysql']
     end
 
-    app.vm.network 'forwarded_port', guest: 443, host: listen_ports['https'], host_ip: '127.0.0.1'
-    app.vm.network 'forwarded_port', guest: 3306, host: listen_ports['mysql'], host_ip: '127.0.0.1'
+    app.vm.network 'forwarded_port', guest: 443, host: listen_https, host_ip: '127.0.0.1'
+    app.vm.network 'forwarded_port', guest: 3306, host: listen_mysql, host_ip: '127.0.0.1'
 
     if developer.has_key? 'projects'
       developer['projects'].each_pair do |to, from|
