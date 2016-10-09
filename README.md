@@ -23,6 +23,7 @@ Open Source, released under the [MIT License](http://choosealicense.com/licenses
 
 * [Puppet Lint (v1.1)](http://puppet-lint.com/)
 * [EditorConfig](http://editorconfig.org/#download)
+* [Vagrant ServerSpec (v1.1)](https://github.com/jvoorhis/vagrant-serverspec) `vagrant plugin install vagrant-serverspec`
 
 ## Getting Started
 
@@ -61,3 +62,9 @@ cd $REPO
 
 puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
 ```
+
+### Acceptance Testing
+
+> Currently not enabled as part of the TravisCI tests.
+
+Provided by [ServerSpec](http://serverspec.org), and is run by Vagrant when the `enable_server_spec` property is set to `true` in your `hiera/developer.yaml` configuration file. See `spec/localhost` for avialable specifications.

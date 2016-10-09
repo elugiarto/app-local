@@ -68,4 +68,13 @@ Vagrant.configure(2) do |config|
 
     shell.inline = "puppet apply --hiera_config=#{hiera_config} --modulepath=#{modules}:#{app_modules} #{manifest}"
   end
+
+  #
+  # ServerSpec testing, only enabled for acceptance testing purposes.
+  #
+  if developer.has_key? 'enable_server_spec' and developer['enable_server_spec'] == true
+    config.vm.provision 'serverspec' do |spec|
+      spec.pattern = './spec/localhost/*'
+    end
+  end
 end

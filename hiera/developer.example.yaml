@@ -3,6 +3,11 @@
 #
 
 #
+# Enable or disable server spec acceptance tests.
+#
+enable_server_spec: false
+
+#
 # Used to customise which ports are mapped to on a developers workstation.
 #
 listen_ports:
