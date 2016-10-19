@@ -30,10 +30,17 @@ git clone https://github.com/dbtedman/app-local.git
 
 5\. Download [Oracle InstantClient (.rpm) Files](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into the `$REPO/app_modules/app_local/files` directory. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file for `oracle_instantclient_basic`, `oracle_instantclient_development` and `oracle_instantclient_sqlplus` properties.
 
+```yaml
+# Example based on instant client version at time of writing these instructions, the current version may be different.
+oracle_instantclient_basic: 'oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm'
+oracle_instantclient_development: 'oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm'
+oracle_instantclient_sqlplus: 'oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm'
+```
+
 6\. Start and provision the virtual machine.
 
 ```bash
-# Vagrant plugins need to be run from within the checked out repository.
+# Vagrant commands must be run from within the checked out repository.
 cd $REPO
 
 # Starts up the VM and runs the Puppet provisioner.
