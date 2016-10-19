@@ -1,5 +1,5 @@
 
-# App Local `v0.1.0` [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=master)](https://travis-ci.org/dbtedman/app-local)
+# App Local `v0.2.0` [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.0)](https://travis-ci.org/dbtedman/app-local)
 
 Provides a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
