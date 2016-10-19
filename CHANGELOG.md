@@ -9,6 +9,8 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 
 * Add better support for versions of InstantClient after `12.1`.
 * Clean up port mapping in `Vagrantfile`.
+* Initial implementation of ServerSpec based acceptance tests.
+* Updated project documentaiton model by separating contributing instructions from usage instructions.
 
 ## 0.1.0 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.1.0)](https://travis-ci.org/dbtedman/app-local)
 
