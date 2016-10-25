@@ -151,7 +151,7 @@ class app_local::components::apache_php {
   }
 
   package { ['php55w-common', 'php55w-opcache', 'php55w-mysql', 'php55w-pdo', 'php55w-odbc',
-    'php55w-pgsql', 'php55w-devel', 'php55w-cli', 'php55w-pear', 'composer' ]:
+    'php55w-pgsql', 'php55w-devel', 'php55w-cli', 'php55w-pear', 'composer', 'php55w-pecl-xdebug']:
     ensure  => 'installed',
     require => [
       Package['php55w'],
@@ -200,6 +200,8 @@ class app_local::components::apache_php {
   # Install oci8 https://pecl.php.net/package/oci8 for latest PHP 5.5 supported version.
   exec { 'install oci8':
     command => 'pecl install oci8-1.4.10',
+    user => 'root',
+    group => 'root',
     unless  => 'test -f /usr/lib64/php/modules/oci8.so',
     require => [
       Package['php55w-pear'],
@@ -210,6 +212,8 @@ class app_local::components::apache_php {
   exec { 'restart apache':
     command     => 'service httpd restart',
     refreshonly => true,
-    subscribe   => Exec['install oci8'],
+    subscribe   => [
+      Exec['install oci8']
+    ]
   }
 }
