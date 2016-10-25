@@ -24,8 +24,8 @@ class app_local::components::node {
   exec { 'npm-clear-cache':
     command     => 'npm cache clean -f',
     refreshonly => true,
-    user        => "root",
-    group       => "root",
+    user        => 'root',
+    group       => 'root',
   }
 
   exec { 'npm-install-n':
@@ -38,8 +38,8 @@ class app_local::components::node {
       Package['nodejs'],
       Package['npm'],
     ],
-    user    => "root",
-    group   => "root",
+    user    => 'root',
+    group   => 'root',
   }
 
   exec { 'node-update-latest-stable':
@@ -48,8 +48,8 @@ class app_local::components::node {
     require => [
       Exec['npm-install-n'],
     ],
-    user    => "root",
-    group   => "root",
+    user    => 'root',
+    group   => 'root',
   }
 
   exec { 'npm-update-latest':
@@ -58,7 +58,7 @@ class app_local::components::node {
     require => [
       Exec['node-update-latest-stable'],
     ],
-    user    => "root",
-    group   => "root",
+    user    => 'root',
+    group   => 'root',
   }
 }

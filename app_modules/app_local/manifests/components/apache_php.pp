@@ -200,8 +200,8 @@ class app_local::components::apache_php {
   # Install oci8 https://pecl.php.net/package/oci8 for latest PHP 5.5 supported version.
   exec { 'install oci8':
     command => 'pecl install oci8-1.4.10',
-    user => 'root',
-    group => 'root',
+    user    => 'root',
+    group   => 'root',
     unless  => 'test -f /usr/lib64/php/modules/oci8.so',
     require => [
       Package['php55w-pear'],
