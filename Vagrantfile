@@ -58,6 +58,12 @@ Vagrant.configure(2) do |config|
   end
 
   #
+  # Update puppet configuration to avoid issue where puppet attempts to contact remote master.
+  # https://docs.puppet.com/puppet/latest/reference/config_file_main.html
+  #
+  config.vm.provision 'shell', inline: 'mkdir -p /etc/puppet && cp /vagrant/app_modules/app_local/files/puppet.conf /etc/puppet/puppet.conf && systemctl restart puppet'
+
+  #
   # Running the Puppet Apply command.
   #
   config.vm.provision 'shell' do |shell|
