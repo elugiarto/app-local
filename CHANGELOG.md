@@ -5,7 +5,10 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 
 ## In Development [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=master)](https://travis-ci.org/dbtedman/app-local)
 
+### 0.2.1 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.1)](https://travis-ci.org/dbtedman/app-local)
+
 * Node and NPM now install latest stable versions.
+* Fix issue where puppet attempts to connect with any puppet master defined in dns.
 
 ### 0.2.0 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.0)](https://travis-ci.org/dbtedman/app-local)
 
