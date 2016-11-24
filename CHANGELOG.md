@@ -5,6 +5,9 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 
 ## In Development [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=master)](https://travis-ci.org/dbtedman/app-local)
 
+* Minor updates to instant client configuration to check for required parameters.
+* Additional php modules.
+
 ### 0.2.1 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.1)](https://travis-ci.org/dbtedman/app-local)
 
 * Node and NPM now install latest stable versions.
