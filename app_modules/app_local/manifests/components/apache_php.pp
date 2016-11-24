@@ -40,11 +40,11 @@ class app_local::components::apache_php {
 
   # Create links to the public directories of each repository.
   $projects.each |$name, $mappings| {
-      file { "${doc_root}/${name}":
-        ensure => 'link',
-        target => "${doc_source}/${name}${mappings['public']}",
-      }
+    file { "${doc_root}/${name}":
+      ensure => 'link',
+      target => "${doc_source}/${name}${mappings['public']}",
     }
+  }
 
   class { 'apache':
     default_vhost => false,
@@ -151,7 +151,8 @@ class app_local::components::apache_php {
   }
 
   package { ['php55w-common', 'php55w-opcache', 'php55w-mysql', 'php55w-pdo', 'php55w-odbc',
-    'php55w-pgsql', 'php55w-devel', 'php55w-cli', 'php55w-pear', 'composer', 'php55w-pecl-xdebug']:
+    'php55w-pgsql', 'php55w-devel', 'php55w-cli', 'php55w-pear', 'composer', 'php55w-pecl-xdebug',
+    'php55w-zlib']:
     ensure  => 'installed',
     require => [
       Package['php55w'],
