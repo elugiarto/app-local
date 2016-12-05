@@ -1,3 +1,9 @@
+#
+# Hosts configuration, http://man7.org/linux/man-pages/man5/hosts.5.html.
+#
+
 127.0.0.1   localhost
 ::1         localhost
+
+# Special case to avoid issue where puppet tries to find its master.
 127.0.0.1   puppet

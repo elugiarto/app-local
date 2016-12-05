@@ -3,12 +3,17 @@
 
 Releases ordered so that the most recent are displayed at the top, with the currently being developed release at the top, labeled as **In Development**. This release will be given a number once it is ready to be released. Each release can contain both a **Features and Improvements** and **Bug Fixes** sections.
 
-## In Development [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=master)](https://travis-ci.org/dbtedman/app-local)
+## 0.2.2 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.2)](https://travis-ci.org/dbtedman/app-local)
+
+### Features and Improvements
 
 * Minor updates to instant client configuration to check for required parameters.
 * Additional php modules.
+* Updates to better handle mixed LF and CRLF to explicitly require LF when using puppet file templates.
 
 ### 0.2.1 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.1)](https://travis-ci.org/dbtedman/app-local)
+
+### Bug Fixes
 
 * Node and NPM now install latest stable versions.
 * Fix issue where puppet attempts to connect with any puppet master defined in dns.

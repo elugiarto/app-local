@@ -32,7 +32,7 @@ class app_local::components::oracle::instant_client {
         owner   => 'root',
         group   => 'root',
         mode    => '0655',
-        content => template("${module_name}/oracle.sh.erb"),
+        content => dos2unix(template("${module_name}/oracle.sh.erb")),
         require => [
           Package["java-${java_version}-openjdk-devel"],
           Package['oracle-instantclient-basic'],

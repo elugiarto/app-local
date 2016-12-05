@@ -84,7 +84,7 @@ class app_local::components::apache_php {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("${module_name}/pingsinglesignon.erb"),
+    content => dos2unix(template("${module_name}/pingsinglesignon.erb")),
     require => File[$security_key],
   }
 
@@ -93,7 +93,7 @@ class app_local::components::apache_php {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("${module_name}/php.ini.erb"),
+    content => dos2unix(template("${module_name}/php.ini.erb")),
   }
 
   # TODO: Review actual apache config on server to better emulate it.
@@ -176,7 +176,7 @@ class app_local::components::apache_php {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("${module_name}/logout.php.erb"),
+    content => dos2unix(template("${module_name}/logout.php.erb")),
     require => [
       File[$doc_root],
       Class['apache::mod::php'],
@@ -189,7 +189,7 @@ class app_local::components::apache_php {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template("${module_name}/login.php.erb"),
+    content => dos2unix(template("${module_name}/login.php.erb")),
     require => [
       File[$doc_root],
       Class['apache::mod::php'],
