@@ -13,7 +13,7 @@ A guide for contributing to this repository which extends the [README.md](README
 * [Vagrant (v1.8)](https://www.vagrantup.com)
 * [Vagrant Librarian Puppet (v0.9)](https://github.com/mhahn/vagrant-librarian-puppet) `vagrant plugin install vagrant-librarian-puppet`
 * [Vagrant Puppet Install (v4.1)](https://github.com/petems/vagrant-puppet-install) `vagrant plugin install vagrant-puppet-install`
-* [Puppet Lint (v1.1)](http://puppet-lint.com/)
+* [Bundler](https://bundler.io/), then run `bundle` to install Ruby dependencies.
 * [EditorConfig](http://editorconfig.org/#download)
 * [Vagrant ServerSpec (v1.1)](https://github.com/jvoorhis/vagrant-serverspec) `vagrant plugin install vagrant-serverspec`
 

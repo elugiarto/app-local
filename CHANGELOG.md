@@ -9,6 +9,7 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 
 * Additional acceptance tests.
 * Updated Ruby dependency handling and TravisCI configuration.
+* Update puppet module dependencies.
 
 ## 0.2.2 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.2)](https://travis-ci.org/dbtedman/app-local)
 
