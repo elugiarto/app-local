@@ -12,6 +12,7 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     pkg-config (1.1.7)
+    puppet-lint (2.0.2)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -34,7 +35,7 @@ GEM
       rspec-its
       specinfra (~> 2.53)
     sfl (2.3)
-    specinfra (2.63.2)
+    specinfra (2.66.3)
       net-scp
       net-ssh (>= 2.7, < 4.0)
       net-telnet
@@ -44,8 +45,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nokogiri
-  serverspec
+  nokogiri (= 1.6.8)
+  puppet-lint (= 2.0.2)
+  serverspec (= 2.36.1)
 
 BUNDLED WITH
-   1.13.1
+   1.13.7
