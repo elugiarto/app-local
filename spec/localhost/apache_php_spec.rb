@@ -13,7 +13,6 @@ describe service('httpd') do
   it { should be_running }
 end
 
-# TODO: Parsing the about php page is a good way to verify the php module configuration.
 describe 'PHP about page "/about.php"' do
   about_document = get_doc_ignore_ssl("#{SITE}/about.php")
   expected_version = /^PHP Version 5\.5\.\d+$/

@@ -3,6 +3,12 @@
 
 Releases ordered so that the most recent are displayed at the top, with the currently being developed release at the top, labeled as **In Development**. This release will be given a number once it is ready to be released. Each release can contain both a **Features and Improvements** and **Bug Fixes** sections.
 
+## In Development
+
+### Features and Improvements
+
+* Additional acceptance tests.
+
 ## 0.2.2 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.2)](https://travis-ci.org/dbtedman/app-local)
 
 ### Features and Improvements

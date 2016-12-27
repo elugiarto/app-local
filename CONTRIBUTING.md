@@ -36,3 +36,9 @@ puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
 > Currently not enabled as part of the TravisCI tests.
 
 Provided by [ServerSpec](http://serverspec.org), and is run by Vagrant when the `enable_server_spec` property is set to `true` in your `hiera/developer.yaml` configuration file. See `spec/localhost` for avialable specifications.
+
+To execute just the acceptance tests, after running the standard setup procedure:
+
+```bash
+vagrant provision --provision-with serverspec
+```
