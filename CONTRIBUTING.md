@@ -28,7 +28,7 @@ Check for formatting issues and automatically resolve them where possible.
 ```bash
 cd $REPO
 
-puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
+bundle exec puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
 ```
 
 ### Acceptance Testing

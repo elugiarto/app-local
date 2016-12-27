@@ -8,6 +8,7 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 ### Features and Improvements
 
 * Additional acceptance tests.
+* Updated Ruby dependency handling and TravisCI configuration.
 
 ## 0.2.2 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.2)](https://travis-ci.org/dbtedman/app-local)
 
