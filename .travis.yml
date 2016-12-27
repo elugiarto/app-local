@@ -9,6 +9,7 @@ rvm:
   - '2.3.1'
 
 before_script:
-  - 'gem install puppet-lint'
+  - 'gem install bundler'
+  - 'bundle'
 
 script: 'puppet-lint app_modules/ --no-80chars-check --no-variable_scope-check'
