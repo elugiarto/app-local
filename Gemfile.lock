@@ -49,5 +49,8 @@ DEPENDENCIES
   puppet-lint (= 2.0.2)
   serverspec (= 2.36.1)
 
+RUBY VERSION
+   ruby 2.4.0p0
+
 BUNDLED WITH
    1.13.7
