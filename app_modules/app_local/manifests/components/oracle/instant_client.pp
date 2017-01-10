@@ -34,7 +34,7 @@ class app_local::components::oracle::instant_client {
         mode    => '0655',
         content => dos2unix(template("${module_name}/oracle.sh.erb")),
         require => [
-          Package["java-${java_version}-openjdk-devel"],
+          Package["java-${java_version}-openjdk-devel.x86_64"],
           Package['oracle-instantclient-basic'],
           Package['oracle-instantclient-devel'],
           Package['oracle-instantclient-sqlplus'],
@@ -42,7 +42,7 @@ class app_local::components::oracle::instant_client {
     }
 
     package {
-      "java-${java_version}-openjdk-devel":
+      "java-${java_version}-openjdk-devel.x86_64":
         ensure  => 'installed';
 
       'oracle-instantclient-basic':

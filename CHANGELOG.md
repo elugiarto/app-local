@@ -9,6 +9,14 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 
 * Fix bug in sso emulation check conditions.
 
+## 0.3.0 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.3.0)](https://travis-ci.org/dbtedman/app-local)
+
+### Features and Improvements
+
+* Additional acceptance tests.
+* Updated Ruby dependency handling and TravisCI configuration.
+* Update puppet module dependencies.
+
 ## 0.2.2 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.2.2)](https://travis-ci.org/dbtedman/app-local)
 
 ### Features and Improvements
