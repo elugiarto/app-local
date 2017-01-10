@@ -3,8 +3,6 @@ echo "SSO Login.";
 
 $ref = md5(date('Y-m-d H:i:s'));
 
-/* TODO: Set SSO session cookies and return REF GET parameter, redirecting back to client. */
-
 $targetResource = $_GET["TargetResource"];
 $parts = preg_split("/\?/", $targetResource);
 
@@ -13,7 +11,7 @@ if (count($parts) > 1) {
 }
 ?>
 
-<form method="get" action="<?php echo $targetResource; ?>">
+<form method="get" action="<?php echo $targetResource; ?>" onSubmit="document.cookie='setSSO=; path=/; domain=localhost;'">
   <input type="hidden" name="REF" value="<?php echo $ref; ?>"/>
 
   <?php
@@ -28,5 +26,3 @@ if (count($parts) > 1) {
 
   <button type="submit">Login</button>
 </form>
-
-<a href=

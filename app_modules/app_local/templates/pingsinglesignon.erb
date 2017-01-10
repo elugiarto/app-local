@@ -66,9 +66,9 @@ function singleSignOn()
   }
 }
 
-function singleSignonRedirect()
+function singleSignonRedirect($version=1, $returnTo="", $appName="")
 {
-  return "<%= @base_url %>/login.php";
+  return "<%= @base_url %>/login.php?TargetResource=" . urlencode($returnTo);
 }
 
 function getPSLogoutByEnv()
