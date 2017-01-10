@@ -20,7 +20,11 @@ function getCurrentURL()
 
 function singleSignOn()
 {
-  if (isset($_GET['REF']) && !empty($_GET['REF'])) {
+  if (!isset($_GET['REF']) && !isset($_COOKIE['setSSO'])) {
+    return array(false, -1);
+  }
+
+  if (isset($_GET['REF'])) {
 
     $groupMemberships = array();
     $affiliations = array();
