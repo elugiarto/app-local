@@ -68,7 +68,10 @@ function singleSignOn()
 
 function singleSignonRedirect($version=1, $returnTo="", $appName="")
 {
-  return "<%= @base_url %>/login.php?TargetResource=" . urlencode($returnTo);
+  $redirectTo = "<%= @base_url %>/login.php?TargetResource=" . urlencode($returnTo);
+
+  header("Location: " . $redirectTo, true, 302);
+  exit;
 }
 
 function getPSLogoutByEnv()
