@@ -6,8 +6,8 @@
 #
 class app_local::components::node {
 
-  $node_version_check = '6.9';
-  $npm_version_check = '3.10';
+  $node_version_check = '7.4';
+  $npm_version_check = '4.0';
 
   # https://nodejs.org
   package { 'nodejs':
@@ -26,6 +26,10 @@ class app_local::components::node {
     refreshonly => true,
     user        => 'root',
     group       => 'root',
+    require     => [
+      Package["npm"],
+      Package["nodejs"],
+    ]
   }
 
   exec { 'npm-install-n':
@@ -43,7 +47,7 @@ class app_local::components::node {
   }
 
   exec { 'node-update-latest-stable':
-    command => 'n lts',
+    command => 'n stable',
     unless  => "! node --version | grep -q v${node_version_check}",
     require => [
       Exec['npm-install-n'],
@@ -53,7 +57,7 @@ class app_local::components::node {
   }
 
   exec { 'npm-update-latest':
-    command => 'npm install npm@latest -g',
+    command => 'npm update npm -g',
     unless  => "npm --version | grep -q ${npm_version_check}",
     require => [
       Exec['node-update-latest-stable'],
