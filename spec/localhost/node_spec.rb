@@ -4,10 +4,10 @@
 
 require_relative '../spec_helper'
 
-describe command('node --version') do
+describe command('source /home/vagrant/.bashrc && node --version') do
   its(:stdout) { should match /^v7\..+/ }
 end
 
-describe command('npm --version') do
+describe command('source /home/vagrant/.bashrc && npm --version') do
   its(:stdout) { should match /^4\..+/ }
 end

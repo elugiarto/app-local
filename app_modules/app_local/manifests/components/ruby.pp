@@ -13,14 +13,15 @@ class app_local::components::ruby {
   ]
 
   package { 'ruby':
-    ensure => 'installed',
+    ensure  => 'installed',
+    require => Class['epel'],
   }
 
   $packages.each |$package| {
-      exec { $package:
-        command => "gem install ${package}",
-        require => Package['ruby'],
-        unless  => "gem list | grep -q ${package}",
-      }
+    exec { $package:
+      command => "gem install ${package}",
+      require => Package['ruby'],
+      unless  => "gem list | grep -q ${package}",
     }
+  }
 }

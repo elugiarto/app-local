@@ -1,13 +1,15 @@
 FORGE
   remote: https://forgeapi.puppetlabs.com
   specs:
+    artberri-nvm (1.1.1)
+      puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
     puppet-staging (2.1.0)
     puppetlabs-apache (1.11.0)
       puppetlabs-concat (< 3.0.0, >= 1.1.1)
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
     puppetlabs-concat (2.2.0)
       puppetlabs-stdlib (< 5.0.0, >= 4.2.0)
-    puppetlabs-firewall (1.8.1)
+    puppetlabs-firewall (1.8.2)
     puppetlabs-mysql (3.10.0)
       puppet-staging (< 3.0.0, >= 1.0.1)
       puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
@@ -16,8 +18,9 @@ FORGE
       puppetlabs-stdlib (>= 3.0.0)
 
 DEPENDENCIES
+  artberri-nvm (= 1.1.1)
   puppetlabs-apache (= 1.11.0)
-  puppetlabs-firewall (= 1.8.1)
+  puppetlabs-firewall (= 1.8.2)
   puppetlabs-mysql (= 3.10.0)
   stahnma-epel (= 1.2.2)
 
