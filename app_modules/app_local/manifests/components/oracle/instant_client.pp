@@ -43,7 +43,8 @@ class app_local::components::oracle::instant_client {
 
     package {
       "java-${java_version}-openjdk-devel.x86_64":
-        ensure  => 'installed';
+        ensure  => 'installed',
+        require => Class["epel"];
 
       'oracle-instantclient-basic':
         ensure          => 'installed',
