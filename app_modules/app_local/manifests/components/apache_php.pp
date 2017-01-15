@@ -96,7 +96,6 @@ class app_local::components::apache_php {
     content => dos2unix(template("${module_name}/php.ini.erb")),
   }
 
-  # TODO: Review actual apache config on server to better emulate it.
   apache::vhost { 'localhost':
     port        => '443',
     docroot     => $doc_root,
@@ -151,8 +150,7 @@ class app_local::components::apache_php {
   }
 
   package { ['php55w-common', 'php55w-opcache', 'php55w-mysql', 'php55w-pdo', 'php55w-odbc',
-    'php55w-pgsql', 'php55w-devel', 'php55w-cli', 'php55w-pear', 'composer', 'php55w-pecl-xdebug',
-    'php55w-zlib']:
+    'php55w-pgsql', 'php55w-devel', 'php55w-cli', 'php55w-pear', 'composer', 'php55w-zlib']:
     ensure  => 'installed',
     require => [
       Package['php55w'],
