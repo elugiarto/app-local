@@ -52,20 +52,39 @@ Vagrant.configure(2) do |config|
 
     if developer.has_key? 'projects'
       developer['projects'].each_pair do |to, from|
-        app.vm.synced_folder File.expand_path(from['source'], File.dirname(__FILE__)), "/app/source/#{to}"
+
+        from_path = File.expand_path(from['source'], File.dirname(__FILE__))
+        to_path = "/app/source/#{to}"
+
+        if developer.has_key? 'enable_rsync' and developer['enable_rsync'] == true
+
+          if Vagrant.has_plugin?('vagrant-gatling-rsync')
+            config.gatling.latency = 1
+            config.gatling.time_format = '%H:%M:%S'
+            config.gatling.rsync_on_startup = false
+          end
+
+          app.vm.synced_folder from_path, to_path, type: 'rsync', rsync__verbose: true, rsync__exclude: %w(*.git/ *.idea/ *.svn/)
+
+        else
+          # Using standard VirtualBox folder sync.
+          app.vm.synced_folder from_path, to_path
+        end
       end
     end
   end
 
   #
-  # Update hosts file to define "puppet" domain in hosts file as 127.0.0.1.
+  # Update hosts file to define "puppet" domain in hosts file as 127.0.0.1. This is important to
+  # stop puppet from calling out to any puppet server that exists on the network.
   #
   config.vm.provision 'shell', inline: 'cp /vagrant/app_modules/app_local/files/hosts /etc/hosts && systemctl restart puppet'
 
   #
-  # Running the Puppet Apply command.
+  # Running the Puppet Apply command to provision the machine.
   #
   config.vm.provision 'shell' do |shell|
+
     modules = '/vagrant/modules'
     app_modules = '/vagrant/app_modules'
     manifest = "#{app_modules}/app_local/manifests/local.pp"

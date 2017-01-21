@@ -3,6 +3,21 @@
 #
 
 #
+# Enable or disable rsync for folder sync. (Experimental)
+#
+# After you have started up the vm and provisioned it, run `vagrant gatling-rsync-auto` to start
+# watching for changes.
+#
+# See https://www.vagrantup.com/docs/other/debugging.html for output if you want to monitor it.
+#   VAGRANT_LOG=info vagrant gatling-rsync-auto (Mac, Linux)
+#
+# Resources:
+#   https://www.vagrantup.com/docs/synced-folders/rsync.html
+#   https://github.com/smerrill/vagrant-gatling-rsync
+#
+enable_rsync: false
+
+#
 # Enable or disable server spec acceptance tests.
 #
 enable_server_spec: false
