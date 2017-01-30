@@ -38,7 +38,12 @@ class app_local::components::oracle::instant_client {
           Package['oracle-instantclient-basic'],
           Package['oracle-instantclient-devel'],
           Package['oracle-instantclient-sqlplus'],
+          File['/etc/sysconfig/network'],
         ];
+
+      '/etc/sysconfig/network':
+        ensure  => 'file',
+        source => "puppet:///modules/${module_name}/sysconfig-network";
     }
 
     package {

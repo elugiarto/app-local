@@ -7,3 +7,6 @@
 
 # Special case to avoid issue where puppet tries to find its master.
 127.0.0.1   puppet
+
+# Help to fix Oracle DB issue.
+127.0.0.1   app-local
