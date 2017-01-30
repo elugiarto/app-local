@@ -101,4 +101,12 @@ Vagrant.configure(2) do |config|
       spec.pattern = './spec/localhost/*'
     end
   end
+
+  #
+  # Configuration for VirtualBox.
+  #
+  config.vm.provider :virtualbox do |vb|
+    # Used to ensure that VM can create symbolic links in shared folders, based on http://serverfault.com/questions/501599.
+    vb.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate//vagrant', '1']
+  end
 end

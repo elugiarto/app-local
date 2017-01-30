@@ -49,7 +49,8 @@ class app_local::components::apache_php {
   class { 'apache':
     default_vhost => false,
     user          => 'vagrant',
-    group         => 'vagrant'
+    group         => 'vagrant',
+    sendfile      => 'Off', # https://www.vagrantup.com/docs/synced-folders/virtualbox.html
   }
 
   file { $app_root:

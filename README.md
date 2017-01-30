@@ -9,10 +9,9 @@ Yes, it is released under the MIT License, See [LICENSE.md](LICENSE.md).
 
 ## Where do I start?
 
+1\. Install [Virtual Box](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com).
 
-1\. Install [Virtual Box (v5.1)](https://www.virtualbox.org/) and [Vagrant (v1.8)](https://www.vagrantup.com).
-
-2\. Install [Vagrant Librarian Puppet (v0.9)](https://github.com/mhahn/vagrant-librarian-puppet) and [Vagrant Puppet Install (v4.1)](https://github.com/petems/vagrant-puppet-install) vagrant plugins.
+2\. Install [Vagrant Librarian Puppet](https://github.com/mhahn/vagrant-librarian-puppet) and [Vagrant Puppet Install](https://github.com/petems/vagrant-puppet-install) vagrant plugins.
 
 3\. Checkout [this repository](https://github.com/dbtedman/app-local) to your machine.
 
@@ -52,6 +51,8 @@ vagrant up --provision
 7\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
 
 > When mapping new projects into the vm or updating the configuration of existing ones, you will need to run the `vagrant reload --provision` command to apply these changes.
+
+> When running from Windows, you will need to run PowerShell as an administrator to be able to create symlinks.
 
 ## Want to learn more?
 

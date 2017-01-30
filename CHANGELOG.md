@@ -8,6 +8,8 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 ### Features and Improvements
 
 * Optional RSync support for synced folders to fix issue where files do not update in vm fast enough using standard file sync.
+* Updated VirtualBox configuration to support symbolic link creation in shared directories.
+* Updated apache configuration to avoid known sync issue.
 
 ## 0.4.0 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.4.0)](https://travis-ci.org/dbtedman/app-local)
 
