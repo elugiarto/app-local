@@ -120,6 +120,9 @@ class app_local::components::apache_php {
     ]
   }
 
+  # Add mod_headers as is not included by default.
+  include apache::mod::headers
+
   # See http://www.rpm.org/max-rpm/s1-rpm-install-additional-options.html
   $install_options = [
     '-Uvh',
