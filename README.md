@@ -36,7 +36,9 @@ oracle_instantclient_development: 'oracle-instantclient12.1-devel-12.1.0.2.0-1.x
 oracle_instantclient_sqlplus: 'oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm'
 ```
 
-6\. Start and provision the virtual machine.
+6\. Download [Oracle Database Express Edition 11g Release 2 for Linux x64](http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) into the `$REPO/app_modules/app_local/files` directory.
+
+7\. Start and provision the virtual machine.
 
 ```bash
 # Vagrant commands must be run from within the checked out repository.
@@ -48,11 +50,13 @@ vagrant up --provision
 
 > See [Vagrant CLI](https://www.vagrantup.com/docs/cli) for documentation on how to interact with the vm.
 
-7\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
+8\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
 
 > When mapping new projects into the vm or updating the configuration of existing ones, you will need to run the `vagrant reload --provision` command to apply these changes.
 
-> When running from Windows, you will need to run PowerShell as an administrator to be able to create symlinks.
+9\. Access installed databases:
+
+> TODO: OracleXE and MySQL
 
 ## Want to learn more?
 

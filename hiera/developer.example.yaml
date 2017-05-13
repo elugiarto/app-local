@@ -3,19 +3,19 @@
 #
 
 #
-# Enable or disable rsync for folder sync. (Experimental)
+# Enable OracleXE install and setup.
 #
-# After you have started up the vm and provisioned it, run `vagrant gatling-rsync-auto` to start
-# watching for changes.
+enable_oracle_xe: true
+
 #
-# See https://www.vagrantup.com/docs/other/debugging.html for output if you want to monitor it.
-#   VAGRANT_LOG=info vagrant gatling-rsync-auto (Mac, Linux)
+# OracleDB root password.
 #
-# Resources:
-#   https://www.vagrantup.com/docs/synced-folders/rsync.html
-#   https://github.com/smerrill/vagrant-gatling-rsync
+xe_root_password: ''
+
 #
-enable_rsync: false
+# File name for rpm zip downloaded from Oracle website.
+#
+xe_zip: ''
 
 #
 # Enable or disable server spec acceptance tests.
@@ -27,7 +27,8 @@ enable_server_spec: false
 #
 listen_ports:
   https: 8443
-  mysql: 3306
+  mysql: 8306
+  xe: 8521
 
 #
 # Set to true if you get ssh auth errors when provisioning vm. This will stop vagrant from trying to

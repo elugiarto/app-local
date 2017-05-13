@@ -89,6 +89,24 @@ class app_local::components::oracle::xe_db (
       require => Exec['configure oracle-xe'],
     }
 
-    # TODO: Create schemas now including initial temp data setup?
+    # TODO: Create schemas now including initial temp data setup.
+
+    # -- Setup DB if not already done.
+    # CREATE TABLESPACE tbs_perm_01
+    # DATAFILE 'tbs_perm_01.dbf'
+    # SIZE 20M AUTOEXTEND ON;
+    # CREATE TEMPORARY TABLESPACE tbs_temp_01
+    # TEMPFILE 'tbs_temp_01.dbf'
+    # SIZE 5M AUTOEXTEND ON;
+    #
+    # -- Create the "EXAMPLE" schema.
+    # CREATE USER EXAMPLE
+    # IDENTIFIED BY password
+    # DEFAULT TABLESPACE tbs_perm_01
+    # TEMPORARY TABLESPACE tbs_temp_01
+    # QUOTA 100M on tbs_perm_01;
+    #
+    # -- Give all access to new schema.
+    # GRANT ALL PRIVILEGES TO EXAMPLE;
   }
 }
