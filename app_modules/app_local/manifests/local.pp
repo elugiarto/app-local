@@ -8,7 +8,7 @@ node 'localhost' {
 
   # Set base configuration for exec.
   Exec {
-    path     => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/', '/usr/local/bin' ],
+    path     => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/', '/usr/local/bin' ],
     provider => 'shell',
   }
 
@@ -17,4 +17,5 @@ node 'localhost' {
   class { 'app_local::components::mysql': }
   class { 'app_local::components::node': }
   class { 'app_local::components::ruby': }
+  class { 'app_local::components::oracle::xe_db': }
 }

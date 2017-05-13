@@ -10,3 +10,4 @@
 
 # Help to fix Oracle DB issue.
 127.0.0.1   app-local
+127.0.0.1   localhost.localdomain

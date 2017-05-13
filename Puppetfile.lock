@@ -3,6 +3,10 @@ FORGE
   specs:
     artberri-nvm (1.1.1)
       puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
+    fiddyspence-sysctl (1.1.0)
+    petems-swap_file (3.1.4)
+      fiddyspence-sysctl (= 1.1.0)
+      puppetlabs-stdlib (>= 4.7.0)
     puppet-staging (2.1.0)
     puppetlabs-apache (1.11.0)
       puppetlabs-concat (< 3.0.0, >= 1.1.1)
@@ -19,6 +23,7 @@ FORGE
 
 DEPENDENCIES
   artberri-nvm (= 1.1.1)
+  petems-swap_file (= 3.1.4)
   puppetlabs-apache (= 1.11.0)
   puppetlabs-firewall (= 1.8.2)
   puppetlabs-mysql (= 3.10.0)

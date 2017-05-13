@@ -40,15 +40,19 @@ Vagrant.configure(2) do |config|
     app.vm.hostname = 'localhost'
 
     listen_https = 8443
-    listen_mysql = 3306
+    listen_mysql = 8306
+    listen_xe = 8521
 
     if developer.has_key? 'listen_ports'
-      listen_https = developer['listen_ports']['https']
-      listen_mysql = developer['listen_ports']['mysql']
+      listen_ports = developer['listen_ports']
+      listen_https = listen_ports['https'] if listen_ports.has_key? 'https'
+      listen_mysql = listen_ports['mysql'] if listen_ports.has_key? 'mysql'
+      listen_xe = developer['listen_ports']['xe'] if listen_ports.has_key? 'xe'
     end
 
     app.vm.network 'forwarded_port', guest: 443, host: listen_https, host_ip: '127.0.0.1'
     app.vm.network 'forwarded_port', guest: 3306, host: listen_mysql, host_ip: '127.0.0.1'
+    app.vm.network 'forwarded_port', guest: 1521, host: listen_xe, host_ip: '127.0.0.1'
 
     if developer.has_key? 'projects'
       developer['projects'].each_pair do |to, from|
@@ -83,7 +87,7 @@ Vagrant.configure(2) do |config|
   #
   # Running the Puppet Apply command to provision the machine.
   #
-  config.vm.provision 'shell' do |shell|
+  config.vm.provision 'shell', name: 'puppet_apply' do |shell|
 
     modules = '/vagrant/modules'
     app_modules = '/vagrant/app_modules'
