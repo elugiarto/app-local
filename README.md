@@ -3,11 +3,11 @@
 
 Provides a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
-## Is it open?
+## Contributors
 
-Yes, it is released under the MIT License, See [LICENSE.md](LICENSE.md).
+* [Daniel Tedman](https://danieltedman.com)
 
-## Where do I start?
+## Getting Started
 
 1\. Install [Virtual Box](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com).
 
@@ -36,16 +36,17 @@ oracle_instantclient_development: 'oracle-instantclient12.1-devel-12.1.0.2.0-1.x
 oracle_instantclient_sqlplus: 'oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm'
 ```
 
-6\. Download [Oracle Database Express Edition 11g Release 2 for Linux x64](http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) into the `$REPO/app_modules/app_local/files` directory.
+6\. Download [Oracle Database Express Edition 11g Release 2 for Linux x64](http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) into the `$REPO/app_modules/app_local/files` directory. The name will need to be added to the `$REPO/heria/developer.yaml` config file for `xe_zip` property.
+
+```yaml
+# Example based on instant client version at time of writing these instructions, the current version may be different.
+xe_zip: 'oracle-xe-11.2.0-1.0.x86_64.rpm.zip'
+```
 
 7\. Start and provision the virtual machine.
 
 ```bash
-# Vagrant commands must be run from within the checked out repository.
-cd $REPO
-
-# Starts up the VM and runs the Puppet provisioner.
-vagrant up --provision
+cd $REPO && vagrant up --provision
 ```
 
 > See [Vagrant CLI](https://www.vagrantup.com/docs/cli) for documentation on how to interact with the vm.
@@ -54,14 +55,36 @@ vagrant up --provision
 
 > When mapping new projects into the vm or updating the configuration of existing ones, you will need to run the `vagrant reload --provision` command to apply these changes.
 
-9\. Access installed databases:
+9\. Connect to installed databases. This will be based on the `listen_ports` properties defined in the `$REPO/heria/developer.yaml` config file.
 
-> TODO: OracleXE and MySQL
+```yaml
+# Example configuration, your port mappings may be configured differently.
+listen_ports:
+  https: 8443
+  mysql: 8306
+  xe: 8521 # OracleXE database.
+```
 
-## Want to learn more?
+## Testing
 
-See our [CONTRIBUTING.md](CONTRIBUTING.md) guide for information regarding:
+See [https://travis-ci.org/dbtedman/app-local](https://travis-ci.org/dbtedman/app-local) for CI results, run on each commit.
 
-* project contributors
-* dependencies
-* testing
+### Static Analysis
+
+Check for formatting issues and automatically resolve them where possible.
+
+```bash
+cd $REPO && bundle exec puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
+```
+
+### Acceptance Testing
+
+> Currently not enabled as part of the TravisCI tests.
+
+Provided by [ServerSpec](http://serverspec.org), and is run by Vagrant when the `enable_server_spec` property is set to `true` in your `hiera/developer.yaml` configuration file. See `spec/localhost` for avialable specifications.
+
+To execute just the acceptance tests, after running the standard setup procedure:
+
+```bash
+cd $REPO && vagrant provision --provision-with serverspec
+```

@@ -28,7 +28,7 @@ enable_server_spec: false
 listen_ports:
   https: 8443
   mysql: 8306
-  xe: 8521
+  xe: 8521 # OracleXE database.
 
 #
 # Set to true if you get ssh auth errors when provisioning vm. This will stop vagrant from trying to
