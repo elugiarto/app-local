@@ -3,13 +3,11 @@
 
 Releases ordered so that the most recent are displayed at the top, with the currently being developed release at the top, labeled as **In Development**. This release will be given a number once it is ready to be released. Each release can contain both a **Features and Improvements** and **Bug Fixes** sections.
 
-## In Development
+## 0.5.0
 
 ### Features and Improvements
 
-* Optional RSync support for synced folders to fix issue where files do not update in vm fast enough using standard file sync.
-* Updated VirtualBox configuration to support symbolic link creation in shared directories.
-* Updated apache configuration to avoid known sync issue.
+* Support for OracleXE DB.
 
 ## 0.4.0 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.4.0)](https://travis-ci.org/dbtedman/app-local)
 
