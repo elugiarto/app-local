@@ -1,3 +1,24 @@
+#
+# Once you have completed this setup, you will want to manually create any required oracle database schemas.
+#
+#   -- Setup DB if not already done.
+#   CREATE TABLESPACE tbs_perm_01
+#   DATAFILE 'tbs_perm_01.dbf'
+#   SIZE 20M AUTOEXTEND ON;
+#   CREATE TEMPORARY TABLESPACE tbs_temp_01
+#   TEMPFILE 'tbs_temp_01.dbf'
+#   SIZE 5M AUTOEXTEND ON;
+#
+#   -- Create the "EXAMPLE" schema.
+#   CREATE USER EXAMPLE
+#   IDENTIFIED BY password
+#   DEFAULT TABLESPACE tbs_perm_01
+#   TEMPORARY TABLESPACE tbs_temp_01
+#   QUOTA 100M on tbs_perm_01;
+#
+#   -- Give all access to new schema.
+#   GRANT ALL PRIVILEGES TO EXAMPLE;
+#
 class app_local::components::oracle::xe_db (
   $enable_oracle_xe    = $::app_local::params::enable_oracle_xe,
   $xe_zip              = $::app_local::params::xe_zip,
@@ -12,6 +33,7 @@ class app_local::components::oracle::xe_db (
   $xe_command          = '/etc/init.d/oracle-xe',
   $xe_configured       = '/oracle-xe-configured',
   $sqlplus             = '/usr/lib/oracle/12.1/client64/bin/sqlplus',
+  $sql                 = 'EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);',
 
 ) inherits app_local::params {
 
@@ -82,31 +104,13 @@ class app_local::components::oracle::xe_db (
     }
 
     exec { 'enable remote access':
-      command => "echo 'EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);' | ${sqlplus} system/${
-        xe_password}",
+      command => ". /etc/profile && echo '${sql}' | ${sqlplus} system/${xe_password}",
       user    => 'root',
       group   => 'root',
-      require => Exec['configure oracle-xe'],
+      require => [
+        Exec['configure oracle-xe'],
+        File['/etc/profile.d/oracle.sh'],
+      ],
     }
-
-    # TODO: Create schemas now including initial temp data setup.
-
-    # -- Setup DB if not already done.
-    # CREATE TABLESPACE tbs_perm_01
-    # DATAFILE 'tbs_perm_01.dbf'
-    # SIZE 20M AUTOEXTEND ON;
-    # CREATE TEMPORARY TABLESPACE tbs_temp_01
-    # TEMPFILE 'tbs_temp_01.dbf'
-    # SIZE 5M AUTOEXTEND ON;
-    #
-    # -- Create the "EXAMPLE" schema.
-    # CREATE USER EXAMPLE
-    # IDENTIFIED BY password
-    # DEFAULT TABLESPACE tbs_perm_01
-    # TEMPORARY TABLESPACE tbs_temp_01
-    # QUOTA 100M on tbs_perm_01;
-    #
-    # -- Give all access to new schema.
-    # GRANT ALL PRIVILEGES TO EXAMPLE;
   }
 }
