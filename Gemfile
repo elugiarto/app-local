@@ -4,8 +4,7 @@
 
 source 'https://rubygems.org'
 
-ruby File.read(File.expand_path('../.ruby-version', __FILE__))
-
 gem 'nokogiri', '1.6.8'
 gem 'puppet-lint', '2.0.2'
 gem 'serverspec', '2.36.1'
+gem 'r10k', '2.5.4'

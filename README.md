@@ -9,7 +9,7 @@ Provides a repeatable local development environment that matches an app server i
 
 1\. Install [Virtual Box](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com).
 
-2\. Install [Vagrant Librarian Puppet](https://github.com/mhahn/vagrant-librarian-puppet) and [Vagrant Puppet Install](https://github.com/petems/vagrant-puppet-install) vagrant plugins.
+2\. Install [Vagrant Puppet Install](https://github.com/petems/vagrant-puppet-install) vagrant plugins.
 
 3\. Checkout [this repository](https://github.com/dbtedman/app-local) to your machine.
 
@@ -22,6 +22,20 @@ git clone https://github.com/dbtedman/app-local.git
 ```
 
 > The path to this repository e.g. `/Users/danieltedman/Workspace/app-local` will hereafter be refereed to as `$REPO`.
+
+4\. Install ruby and [bundler](http://bundler.io/).
+
+5\. Install ruby dependencies.
+
+```bash
+bundle
+```
+
+6\. Install puppet module dependencies.
+
+```bash
+bundle exec r10k puppetfile install --verbose
+```
 
 4\. Define a `$REPO/hiera/developer.yaml` configuration file to customise Puppet and Vagrant configuration by duplicating the example configuration file `$REPO/hiera/developer.example.yaml`.
 
