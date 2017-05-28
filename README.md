@@ -1,13 +1,11 @@
 
-# App Local `v0.5.0` [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local)
+# [App Local](https://github.com/dbtedman/app-local)
+
+[![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 
 Provides a repeatable local development environment that matches an app server infrastructure, associated databases and services.
 
-## Contributors
-
-* [Daniel Tedman](https://danieltedman.com)
-
-## Getting Started
+## Where do I start?
 
 1\. Install [Virtual Box](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com).
 
@@ -88,3 +86,9 @@ To execute just the acceptance tests, after running the standard setup procedure
 ```bash
 cd $REPO && vagrant provision --provision-with serverspec
 ```
+
+---
+
+Created [Down Under](https://en.wikipedia.org/wiki/Australia) by [Daniel Tedman](https://danieltedman.com).
+
+[![Australia](https://danieltedman.com/images/Australia.png)](https://en.wikipedia.org/wiki/Australia)
