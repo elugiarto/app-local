@@ -1,6 +1,6 @@
 #
 # Apache and PHP Configuration.
-# PHP configuration is based on https://webtatic.com/packages/php55/, to enable version 5.5 support.
+# PHP configuration is based on https://webtatic.com/packages/php56/, to enable version 5.5 support.
 #
 # Required Modules:
 #   https://forge.puppet.com/puppetlabs/apache
@@ -145,7 +145,7 @@ class app_local::components::apache_php {
   }
 
   class { 'apache::mod::php':
-    package_name   => 'php55w', # Ensure we install php 5.5 package.
+    package_name   => 'php56w', # Ensure we install php 5.5 package.
     package_ensure => 'installed',
     require        => [
       Package['epel-release-7-7.noarch'],
@@ -153,11 +153,11 @@ class app_local::components::apache_php {
     ],
   }
 
-  package { ['php55w-common', 'php55w-opcache', 'php55w-mysql', 'php55w-pdo', 'php55w-odbc',
-    'php55w-pgsql', 'php55w-devel', 'php55w-cli', 'php55w-pear', 'composer', 'php55w-zlib']:
+  package { ['php56w-common', 'php56w-opcache', 'php56w-mysql', 'php56w-pdo', 'php56w-odbc',
+    'php56w-pgsql', 'php56w-devel', 'php56w-cli', 'php56w-pear', 'composer', 'php56w-zlib']:
     ensure  => 'installed',
     require => [
-      Package['php55w'],
+      Package['php56w'],
     ],
   }
 
@@ -207,7 +207,7 @@ class app_local::components::apache_php {
     group   => 'root',
     unless  => 'test -f /usr/lib64/php/modules/oci8.so',
     require => [
-      Package['php55w-pear'],
+      Package['php56w-pear'],
       Class['app_local::components::oracle::instant_client']
     ],
   }

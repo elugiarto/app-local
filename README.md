@@ -50,6 +50,8 @@ oracle_instantclient_sqlplus: 'oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86
 
 6\. Download [Oracle Database Express Edition 11g Release 2 for Linux x64](http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html) into the `$REPO/app_modules/app_local/files` directory. The name will need to be added to the `$REPO/heria/developer.yaml` config file for `xe_zip` property.
 
+> Only required if you enable (experimental) Oracle XE DB setup in your `hiera/developer.yaml` file.
+
 ```yaml
 # Example based on instant client version at time of writing these instructions, the current version may be different.
 xe_zip: 'oracle-xe-11.2.0-1.0.x86_64.rpm.zip'
@@ -93,7 +95,7 @@ cd $REPO && bundle exec puppet-lint app_modules/ --fix --no-80chars-check --no-v
 
 > Currently not enabled as part of the TravisCI tests.
 
-Provided by [ServerSpec](http://serverspec.org), and is run by Vagrant when the `enable_server_spec` property is set to `true` in your `hiera/developer.yaml` configuration file. See `spec/localhost` for avialable specifications.
+Provided by [ServerSpec](http://serverspec.org), and is run by Vagrant when the `enable_server_spec` property is set to `true` in your `hiera/developer.yaml` configuration file. See `spec/localhost` for avialable specifications. You will need to install the [Vagrant ServerSpec](https://github.com/vvchik/vagrant-serverspec) plugin if you wish to run the acceptance test suite.
 
 To execute just the acceptance tests, after running the standard setup procedure:
 

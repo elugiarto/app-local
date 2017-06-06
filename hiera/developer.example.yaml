@@ -3,9 +3,9 @@
 #
 
 #
-# Enable OracleXE install and setup.
+# Enable OracleXE install and setup. (Experimental)
 #
-enable_oracle_xe: true
+enable_oracle_xe: false
 
 #
 # OracleDB root password.
