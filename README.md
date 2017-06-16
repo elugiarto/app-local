@@ -25,16 +25,18 @@ git clone https://github.com/dbtedman/app-local.git
 
 4\. Install ruby and [bundler](http://bundler.io/).
 
+> If you are on Windows and see errors like `SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed`, see [SSL Certificate Updates](http://guides.rubygems.org/ssl-certificate-update/) for instructions on how to fix this error.
+
 5\. Install ruby dependencies.
 
 ```bash
-bundle
+cd $REPO && bundle
 ```
 
 6\. Install puppet module dependencies.
 
 ```bash
-bundle exec r10k puppetfile install --verbose
+cd $REPO && bundle exec r10k puppetfile install --verbose
 ```
 
 4\. Define a `$REPO/hiera/developer.yaml` configuration file to customise Puppet and Vagrant configuration by duplicating the example configuration file `$REPO/hiera/developer.example.yaml`.
@@ -57,7 +59,20 @@ oracle_instantclient_sqlplus: 'oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86
 xe_zip: 'oracle-xe-11.2.0-1.0.x86_64.rpm.zip'
 ```
 
-7\. Start and provision the virtual machine.
+7\. Update the `$REPO/heria/developer.yaml` file, `projects` section to map projects in your workspace into the VM.
+
+> When mapping new projects into the vm or updating the configuration of existing ones, you will need to run the `vagrant reload --provision` command to apply these changes. This is not required however when you are first setting up app-local vm.
+
+```yaml
+projects:
+  apples:
+    source: 'D:\Workspace\apples-git'
+    public: '/public/'
+```
+
+> In the above example, the key `apples` will be used to create the URL `https://localhost:8443/apples/` which will read files from the `/public/` subdirectory of the `D:\Workspace\apples-git` source directory on your workstation. For example, `https://localhost:8443/apples/about.txt` will return the contents of the `D:\Workspace\apples-git\public\about.txt` file. Slashes ` \ ` or ` / ` in the source property are based on your workstation operating system, however the public path will always use ` / ` slashes.
+
+8\. Start and provision the virtual machine.
 
 ```bash
 cd $REPO && vagrant up --provision
@@ -65,11 +80,9 @@ cd $REPO && vagrant up --provision
 
 > See [Vagrant CLI](https://www.vagrantup.com/docs/cli) for documentation on how to interact with the vm.
 
-8\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
+9\. View an index of deployed applications, [https://localhost:8443](https://localhost:8443).
 
-> When mapping new projects into the vm or updating the configuration of existing ones, you will need to run the `vagrant reload --provision` command to apply these changes.
-
-9\. Connect to installed databases. This will be based on the `listen_ports` properties defined in the `$REPO/heria/developer.yaml` config file.
+10\. Connect to installed databases. This will be based on the `listen_ports` properties defined in the `$REPO/heria/developer.yaml` config file.
 
 ```yaml
 # Example configuration, your port mappings may be configured differently.
