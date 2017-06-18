@@ -15,6 +15,7 @@
 /.tmp/
 /modules/
 /*.log
+/.bundle/
 
 # Files downloaded from vendor.
 /app_modules/app_local/files/oracle-*
