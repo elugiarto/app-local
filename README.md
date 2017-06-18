@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 
-Provides a repeatable local development environment that matches an app server infrastructure, associated databases and services.
+Provides a repeatable local development environment that matches an app server infrastructure, associated databases, and services.
 
 ## Where do I start?
 
