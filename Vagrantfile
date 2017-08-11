@@ -112,5 +112,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider :virtualbox do |vb|
     # Used to ensure that VM can create symbolic links in shared folders, based on http://serverfault.com/questions/501599.
     vb.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate//vagrant', '1']
+    vb.memory = 2048
+    vb.cpus = 2
   end
 end
