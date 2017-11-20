@@ -16,6 +16,5 @@ node 'localhost' {
   class { 'app_local::components::apache_php': }
   class { 'app_local::components::mysql': }
   class { 'app_local::components::node': }
-  class { 'app_local::components::ruby': }
   class { 'app_local::components::oracle::xe_db': }
 }
