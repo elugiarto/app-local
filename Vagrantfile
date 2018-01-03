@@ -102,7 +102,7 @@ Vagrant.configure(2) do |config|
   #
   if developer.has_key? 'enable_server_spec' and developer['enable_server_spec'] == true
     config.vm.provision 'serverspec' do |spec|
-      spec.pattern = './spec/localhost/*'
+      spec.pattern = './spec-acceptance/localhost/*'
     end
   end
 
