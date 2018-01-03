@@ -9,7 +9,7 @@ Releases ordered so that the most recent are displayed at the top, with the curr
 
 * PHP v5.6 support to match new server environment.
 
-## 0.5.0
+## 0.5.0 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local)
 
 ### Features and Improvements
 

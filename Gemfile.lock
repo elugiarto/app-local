@@ -29,8 +29,6 @@ GEM
     net-telnet (0.1.1)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
-    nokogiri (1.8.1-x64-mingw32)
-      mini_portile2 (~> 2.3.0)
     puppet-lint (2.3.3)
     puppet_forge (2.2.9)
       faraday (>= 0.9.0, < 0.14.0)
@@ -78,7 +76,6 @@ GEM
 
 PLATFORMS
   ruby
-  x64-mingw32
 
 DEPENDENCIES
   nokogiri (= 1.8.1)

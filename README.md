@@ -1,7 +1,9 @@
 
 # [App Local](https://github.com/dbtedman/app-local)
 
-[![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
+[![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
+[![Known Vulnerabilities](https://snyk.io/test/github/dbtedman/app-local/badge.svg)](https://snyk.io/test/github/dbtedman/app-local)
 
 Provides a repeatable local development environment that matches an app server infrastructure, associated databases, and services.
 
@@ -110,31 +112,11 @@ listen_ports:
   xe: 8521 # OracleXE database.
 ```
 
-## Testing
+## Want to lean more?
 
-See [https://travis-ci.org/dbtedman/app-local](https://travis-ci.org/dbtedman/app-local) for CI results, run on each commit.
+See our [Contributing Guide](CONTRIBUTING.md) for details on how the sausage is made.
 
-### Static Analysis
-
-Check for formatting issues and automatically resolve them where possible.
-
-```bash
-cd $REPO && bundle exec puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
-```
-
-### Acceptance Testing
-
-> Currently not enabled as part of the TravisCI tests.
-
-Provided by [ServerSpec](http://serverspec.org), and is run by Vagrant when the `enable_server_spec` property is set to `true` in your `hiera/developer.yaml` configuration file. See `spec/localhost` for avialable specifications. You will need to install the [Vagrant ServerSpec](https://github.com/vvchik/vagrant-serverspec) plugin if you wish to run the acceptance test suite.
-
-To execute just the acceptance tests, after running the standard setup procedure:
-
-```bash
-cd $REPO && vagrant provision --provision-with serverspec
-```
-
----
+## Who built it?
 
 Created [Down Under](https://en.wikipedia.org/wiki/Australia) by [Daniel Tedman](https://danieltedman.com).
 
