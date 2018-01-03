@@ -1,10 +1,10 @@
 #
-# Bundler config, http://bundler.io.
+# Bundler configuration, http://bundler.io.
 #
 
 source 'https://rubygems.org'
 
-gem 'nokogiri', '~>1.6.8'
-gem 'puppet-lint', '~>2.0.2'
-gem 'serverspec', '~>2.36.1'
-gem 'r10k', '~>2.5.4'
+gem 'nokogiri', '1.8.1'
+gem 'puppet-lint', '2.3.3'
+gem 'r10k', '2.6.1'
+gem 'serverspec', '2.41.3'
