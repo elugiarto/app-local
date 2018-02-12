@@ -153,8 +153,21 @@ class app_local::components::apache_php {
     ],
   }
 
-  package { ['php56w-common', 'php56w-opcache', 'php56w-mysql', 'php56w-pdo', 'php56w-odbc',
-    'php56w-pgsql', 'php56w-devel', 'php56w-cli', 'php56w-pear', 'composer', 'php56w-zlib']:
+  # See https://webtatic.com/packages/php56/ for php562* dependency details.
+  package { [
+    'php56w-common',
+    'php56w-opcache',
+    'php56w-mysql',
+    'php56w-pdo',
+    'php56w-odbc',
+    'php56w-pgsql',
+    'php56w-devel',
+    'php56w-cli',
+    'php56w-pear',
+    'composer',
+    'php56w-zlib',
+    'php56w-pecl-xdebug' # Is needed to enable code coverage reporting.
+  ]:
     ensure  => 'installed',
     require => [
       Package['php56w'],

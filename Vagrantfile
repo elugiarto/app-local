@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
   # Handle errors with ssh key insertion.
   #
   if developer.has_key? 'disable_ssh_key_insert' and developer['disable_ssh_key_insert'] == true
-    config.ssh.insert_key=false
+    config.ssh.insert_key = false
   end
 
   #
@@ -109,10 +109,16 @@ Vagrant.configure(2) do |config|
   #
   # Configuration for VirtualBox.
   #
-  config.vm.provider :virtualbox do |vb|
+  config.vm.provider 'virtualbox' do |vb|
     # Used to ensure that VM can create symbolic links in shared folders, based on http://serverfault.com/questions/501599.
     vb.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate//vagrant', '1']
-    vb.memory = 2048
-    vb.cpus = 2
+
+    if developer.has_key? 'virtualbox_memory'
+      vb.customize ["modifyvm", :id, "--memory", developer['virtualbox_memory']]
+    else
+      vb.customize ["modifyvm", :id, "--memory", 2048]
+    end
+
+    vb.customize ["modifyvm", :id, "--cpus", "2"]
   end
 end

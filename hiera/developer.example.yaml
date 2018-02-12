@@ -23,6 +23,11 @@ xe_zip: ''
 enable_server_spec: false
 
 #
+# Configure memory allocation for VM.
+#
+virtualbox_memory: 4096
+
+#
 # Used to customise which ports are mapped to on a developers workstation.
 #
 listen_ports:
