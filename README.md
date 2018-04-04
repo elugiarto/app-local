@@ -9,6 +9,10 @@ Provides a repeatable local development environment that matches an app server i
 
 ## Where do I start?
 
+0\. Ensure your machine has virtualization enabled. (Windows Only)
+
+> Instructions are forthcoming.
+
 1\. Install [Virtual Box](https://www.virtualbox.org/) and [Vagrant](https://www.vagrantup.com).
 
 2\. Install [Vagrant Puppet Install](https://github.com/petems/vagrant-puppet-install) vagrant plugins.
