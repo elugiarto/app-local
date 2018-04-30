@@ -1,7 +1,7 @@
 
 # [App Local](https://github.com/dbtedman/app-local)
 
-[![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local) 
+[![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 [![Known Vulnerabilities](https://snyk.io/test/github/dbtedman/app-local/badge.svg)](https://snyk.io/test/github/dbtedman/app-local)
 
@@ -63,7 +63,104 @@ cd $REPO && bundle
 cd $REPO && bundle exec r10k puppetfile install --verbose
 ```
 
-7\. Define a `$REPO/hiera/developer.yaml` configuration file to customise Puppet and Vagrant configuration by duplicating the example configuration file `$REPO/hiera/developer.example.yaml`.
+7\. Define a `$REPO/hiera/developer.yaml` configuration file to customise Puppet and Vagrant configuration.
+
+```yaml
+#
+# Customize the PHP version. (Experimental)
+#
+php: '56'
+
+#
+# Enable OracleXE install and setup. (Experimental)
+#
+enable_oracle_xe: false
+
+#
+# OracleDB root password.
+#
+xe_root_password: ''
+
+#
+# File name for rpm zip downloaded from Oracle website.
+#
+xe_zip: 'oracle-xe-??????.x86_64.rpm.zip'
+
+#
+# Enable or disable server spec acceptance tests.
+#
+enable_server_spec: false
+
+#
+# Configure memory allocation for VM.
+#
+virtualbox_memory: 4096
+
+#
+# SSO Demo Data. Update these to emulate a different user or a user with different access.
+#
+sso_dummy_staff_number: 's123456'
+sso_dummy_given_name: 'Jane'
+sso_dummy_family_name: 'Doe'
+sso_dummy_email: 'jane.doe@example.com'
+sso_dummy_group_memberships:
+  - 'cn=General Staff (All),ou=Groups,o=Griffith University'
+  - 'cn=Staff (NA),ou=Groups,o=Griffith University'
+sso_dummy_affiliations:
+  - 'EMPLOYEE'
+  - 'GENERAL'
+
+#
+# Used to customise which ports are mapped to on a developers workstation.
+#
+listen_ports:
+  https: 8443
+  mysql: 8306
+  xe: 8521 # OracleXE database.
+
+#
+# Set to true if you get ssh auth errors when provisioning vm. This will stop vagrant from trying to
+# replace the ssh keys that came with the base VM box.
+#
+disable_ssh_key_insert: false
+
+#
+# RPM files downloaded in dependencies instructions, add just the file names here not their full path.
+#
+oracle_instantclient_basic: 'oracle-instantclient12.1-basic-??????.x86_64.rpm'
+oracle_instantclient_development: 'oracle-instantclient12.1-devel-??????.x86_64.rpm'
+oracle_instantclient_sqlplus: 'oracle-instantclient12.1-sqlplus-??????.x86_64.rpm'
+
+#
+# MySQL database configuration.
+#
+# The 'testdb' key is the name of the database, change this to change the database name.
+# The 'testuser' key is the username being created, change this to change the username being created.
+#
+mysql:
+  root_password: 'password'
+
+  databases:
+    testdb:
+      users:
+        testuser:
+          password: 'password'
+          grants:
+            - 'ALL'
+
+#
+# Defines which repositories will be mapped into the VM and how.
+#
+# The key 'example' will be used in the url of the website, e.g. https://localhost:8443/example/.
+# Change this to the name you want in the URL. The source is the location of the code on your
+# development machine. Use '/' or '\' based on OS. The public is the path relative to the root of
+# code as it will appear in the vm. It uses '/' here even if source is on Windows.
+#
+projects:
+  example:
+    source: '/Users/jane/Workspace/example'
+    public: '/public'
+```
 
 8\. Download [Oracle InstantClient (.rpm) Files](http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html) **basic**, **devel** and **sqlplus** into the `$REPO/app_modules/app_local/files` directory. The names of these files will need to be added to the `$REPO/heria/developer.yaml` config file for `oracle_instantclient_basic`, `oracle_instantclient_development` and `oracle_instantclient_sqlplus` properties.
 
