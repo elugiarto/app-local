@@ -1,11 +1,13 @@
 #
 # Apache and PHP Configuration.
-# PHP configuration is based on https://webtatic.com/packages/php56/, to enable version 5.5 support.
 #
 # Required Modules:
 #   https://forge.puppet.com/puppetlabs/apache
 #
 class app_local::components::apache_php {
+
+  $php_version = hiera('php', '56')
+  $oci8_version = '1.4.10' # TODO: This needs to be based on the chosen php version. (Known to work for 56 version)
 
   $app_root = '/app'
   $doc_root = '/app/web'
@@ -145,7 +147,7 @@ class app_local::components::apache_php {
   }
 
   class { 'apache::mod::php':
-    package_name   => 'php56w', # Ensure we install php 5.5 package.
+    package_name   => "php${php_version}w",
     package_ensure => 'installed',
     require        => [
       Package['epel-release-7-7.noarch'],
@@ -153,24 +155,24 @@ class app_local::components::apache_php {
     ],
   }
 
-  # See https://webtatic.com/packages/php56/ for php562* dependency details.
+  # See https://webtatic.com/packages/ for dependency details.
   package { [
-    'php56w-common',
-    'php56w-opcache',
-    'php56w-mysql',
-    'php56w-pdo',
-    'php56w-odbc',
-    'php56w-pgsql',
-    'php56w-devel',
-    'php56w-cli',
-    'php56w-pear',
-    'composer',
-    'php56w-zlib',
-    'php56w-pecl-xdebug' # Is needed to enable code coverage reporting.
+    "php${php_version}w-common",
+    "php${php_version}w-opcache",
+    "php${php_version}w-mysql",
+    "php${php_version}w-pdo",
+    "php${php_version}w-odbc",
+    "php${php_version}w-pgsql",
+    "php${php_version}w-devel",
+    "php${php_version}w-cli",
+    "php${php_version}w-pear",
+    "php${php_version}w-zlib",
+    "php${php_version}w-pecl-xdebug", # Is needed to enable code coverage reporting.
+    "composer"
   ]:
     ensure  => 'installed',
     require => [
-      Package['php56w'],
+      Package["php${php_version}w"],
     ],
   }
 
@@ -213,14 +215,14 @@ class app_local::components::apache_php {
 
   class { 'app_local::components::oracle::instant_client': }
 
-  # Install oci8 https://pecl.php.net/package/oci8 for latest PHP 5.5 supported version.
+  # Install oci8 https://pecl.php.net/package/oci8 for latest supported PHP version.
   exec { 'install oci8':
-    command => 'pecl install oci8-1.4.10',
+    command => "pecl install oci8-${oci8_version}",
     user    => 'root',
     group   => 'root',
     unless  => 'test -f /usr/lib64/php/modules/oci8.so',
     require => [
-      Package['php56w-pear'],
+      Package["php${php_version}w-pear"],
       Class['app_local::components::oracle::instant_client']
     ],
   }
