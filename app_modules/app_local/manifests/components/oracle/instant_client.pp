@@ -42,14 +42,14 @@ class app_local::components::oracle::instant_client {
         ];
 
       '/etc/sysconfig/network':
-        ensure  => 'file',
+        ensure => 'file',
         source => "puppet:///modules/${module_name}/sysconfig-network";
     }
 
     package {
       "java-${java_version}-openjdk-devel.x86_64":
         ensure  => 'installed',
-        require => Class["epel"];
+        require => Class['epel'];
 
       'oracle-instantclient-basic':
         ensure          => 'installed',

@@ -168,7 +168,7 @@ class app_local::components::apache_php {
     "php${php_version}w-pear",
     "php${php_version}w-zlib",
     "php${php_version}w-pecl-xdebug", # Is needed to enable code coverage reporting.
-    "composer"
+    'composer'
   ]:
     ensure  => 'installed',
     require => [

@@ -4,7 +4,7 @@
 language: ruby
 sudo: false
 
-script: bundle exec puppet-lint app_modules/ --fix --no-80chars-check --no-variable_scope-check
+script: bundle exec puppet-lint app_modules/ --no-80chars-check --no-variable_scope-check
 
 notifications:
   slack:
