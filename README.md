@@ -3,6 +3,7 @@
 
 [![Build Status](https://travis-ci.org/dbtedman/app-local.svg?branch=0.5.0)](https://travis-ci.org/dbtedman/app-local)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
+[![Maintainability](https://api.codeclimate.com/v1/badges/828ed3b3342d8859f509/maintainability)](https://codeclimate.com/github/dbtedman/app-local/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/dbtedman/app-local/badge.svg)](https://snyk.io/test/github/dbtedman/app-local)
 
 Provides a repeatable local development environment that matches an app server infrastructure, associated databases, and services.
